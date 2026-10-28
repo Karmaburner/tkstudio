@@ -20,6 +20,8 @@ export default function Forside() {
         <div className="hero-bilde relative h-[52svh] min-h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[62%]">
           <Foto bilde={bilder.hero} prioritet sizes="(min-width: 1024px) 62vw, 100vw" className="h-full w-full object-cover" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-kull via-kull/30 to-transparent lg:bg-gradient-to-r lg:from-kull lg:via-kull/20" />
+          {/* Svart panel som klippes bort på skrå. Bildet ligger klart under, så det teller som vist med en gang. */}
+          <div aria-hidden="true" className="hero-dekke absolute inset-0 bg-kull" />
         </div>
 
         {/* Kjempestor TK i omriss bak teksten. Bare pynt. */}

@@ -151,13 +151,14 @@ p {
   }
 }
 
-/* Klippet: heltebildet åpnes på skrå, som et saksekutt. */
-@keyframes klipp-inn {
+/* Klippet: et svart panel over heltebildet kuttes bort på skrå, som et saksekutt.
+   Bildet selv animeres ikke, så LCP ikke venter på animasjonen. */
+@keyframes klipp-bort {
   from {
-    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
   to {
-    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 0 0, -14% 100%, 0 100%);
   }
 }
 /* Neonlinjen tegnes over siden. */
@@ -186,6 +187,10 @@ p {
     opacity: 1;
     transform: none;
   }
+}
+/* Uten animasjon er panelet borte med en gang. */
+.hero-dekke {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 }
 @keyframes flimmer {
   0%, 100% { opacity: 1; }
@@ -225,8 +230,8 @@ p {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-bilde {
-    animation: klipp-inn 1.1s cubic-bezier(0.7, 0, 0.2, 1) 0.15s both;
+  .hero-dekke {
+    animation: klipp-bort 1.1s cubic-bezier(0.7, 0, 0.2, 1) 0.15s both;
   }
   .hero-strek {
     transform-origin: left;
