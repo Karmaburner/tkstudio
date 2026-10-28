@@ -7,7 +7,7 @@ const b = (fil: string) => `${base}/bilder/${fil}`;
 
 export const salong = {
   navn: "TK Studio",
-  slagord: "Hår på kanten",
+  slagord: "Hår med mening",
   gate: "Saksegata 12",
   postnr: "3510",
   sted: "Hønefoss",

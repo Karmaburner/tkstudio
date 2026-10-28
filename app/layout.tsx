@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: `%s · ${salong.navn}`,
   },
   description:
-    "Hår på kanten. Klipp, sterke farger, balayage, herre og oppsatt hår. Bestill time på nett. Demo laget av Lilit Labs.",
+    "Hår med mening. Klipp, sterke farger, balayage, herre og oppsatt hår. Bestill time på nett. Demo laget av Lilit Labs.",
   // Salongen er oppdiktet. Siden skal ikke dukke opp når folk søker etter en ekte frisør.
   robots: { index: false, follow: false },
   openGraph: {
