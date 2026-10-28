@@ -217,12 +217,12 @@ export default function Forside() {
       {/* ---------- Bestill ---------- */}
       <section aria-labelledby="cta-tittel" className="relative mt-36">
         <div aria-hidden="true" className="tegn neonglod mx-auto mb-10 h-[3px] w-[80%] -rotate-3 bg-neon" />
-        <div className="kutt-begge relative overflow-hidden bg-rod py-[calc(3.5vw+5rem)]">
+        <div className="kutt-begge relative isolate overflow-hidden bg-rod py-[calc(3.5vw+5rem)]">
           <Foto
             bilde={bilder.sakser}
-            className="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-multiply"
+            className="absolute inset-0 h-full w-full object-cover opacity-15 grayscale"
           />
-          <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
             <h2 id="cta-tittel" className="text-[clamp(3.5rem,12vw,10rem)]">
               Klar for <br className="sm:hidden" />
               noe nytt?
