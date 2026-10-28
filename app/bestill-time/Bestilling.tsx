@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { alleBehandlinger, apningstider, kategorier, minutter, team } from "@/lib/salong";
+import { alleBehandlinger, apningstider, kategorier, minutter, team, tillegg } from "@/lib/salong";
+
+const kroner = (pris: string) => parseInt(pris.replace(/\D/g, ""));
+const trengerToning = ["Striper", "Balayage", "Bleking"];
 
 type Dag = { id: string; navn: string; dato: string; tider: string[] };
 
@@ -66,6 +69,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
   const [frisor, setFrisor] = useState(team.some((p) => p.slug === start.frisor) ? start.frisor! : "forste");
   const [dagId, setDagId] = useState("");
   const [valgtTid, setTid] = useState("");
+  const [ekstra, setEkstra] = useState<string[]>([]);
   const [feil, setFeil] = useState<Feil>({});
   const [sendt, setSendt] = useState(false);
 
@@ -77,7 +81,15 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
     () => false,
   );
   const valgtBehandling = alleBehandlinger.find((b) => b.navn === behandling);
-  const varighet = valgtBehandling ? minutter(valgtBehandling.tid) : 30;
+  const valgteTillegg = tillegg.filter((t) => ekstra.includes(t.navn));
+  const varighet = (valgtBehandling ? minutter(valgtBehandling.tid) : 30) + valgteTillegg.reduce((sum, t) => sum + minutter(t.tid), 0);
+  const sum = valgtBehandling ? kroner(valgtBehandling.pris) + valgteTillegg.reduce((s, t) => s + kroner(t.pris), 0) : 0;
+  const prisTekst = valgtBehandling
+    ? `${valgtBehandling.pris.startsWith("fra") ? "fra " : ""}${sum.toLocaleString("nb-NO")} kr`
+    : "–";
+  const timer = Math.floor(varighet / 60);
+  const varighetTekst = [timer ? `${timer} t` : "", varighet % 60 ? `${varighet % 60} min` : ""].filter(Boolean).join(" ");
+  const behandlingTekst = [behandling, ...ekstra].filter(Boolean).join(" + ");
   const anbefalt = valgtBehandling?.kategori.frisor;
   const dager = klar ? lagDager(frisor, varighet) : [];
   const dag = dager.find((d) => d.id === dagId) ?? dager[0];
@@ -105,7 +117,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
       <div role="status" className="kutt-hjorne bg-fuksia p-8 sm:p-12">
         <p className="smal text-[clamp(3rem,8vw,5.5rem)] leading-none">Sees!</p>
         <p className="mt-5 max-w-prose text-[1.1875rem]">
-          {behandling} med {frisorNavn?.toLowerCase() === "første ledige" ? "første ledige frisør" : frisorNavn}, {dag?.navn.toLowerCase()}{" "}
+          {behandlingTekst} med {frisorNavn?.toLowerCase() === "første ledige" ? "første ledige frisør" : frisorNavn}, {dag?.navn.toLowerCase()}{" "}
           {dag?.dato} klokka <span className="tall">{tid}</span>.
         </p>
         <p className="mt-4 max-w-prose">
@@ -154,6 +166,42 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <p className="bred text-[0.875rem] text-lavendel">Legg til</p>
+            <p className="mt-2 text-gra">Kan bare bestilles sammen med en behandling over.</p>
+            <div className="mt-3 grid gap-2 md:grid-cols-2">
+              {tillegg.map((t) => (
+                <label key={t.navn} className={kort}>
+                  <span className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      name="tillegg"
+                      value={t.navn}
+                      checked={ekstra.includes(t.navn)}
+                      onChange={(e) =>
+                        setEkstra((v) => (e.target.checked ? [...v, t.navn] : v.filter((x) => x !== t.navn)))
+                      }
+                      className="sr-only"
+                    />
+                    <span aria-hidden="true" className="tall w-4 text-center">
+                      {ekstra.includes(t.navn) ? "✓" : "+"}
+                    </span>
+                    <span>
+                      <span className="block font-bold">
+                        {t.navn}
+                        {t.navn === "Toning" && trengerToning.includes(behandling) && (
+                          <span className="kutt-hjorne ml-2 bg-lavendel px-2 py-0.5 text-[0.875rem] text-kull">Anbefalt</span>
+                        )}
+                      </span>
+                      <span className="tall block text-[0.9375rem]">{t.tid}</span>
+                    </span>
+                  </span>
+                  <span className="tall whitespace-nowrap">+ {t.pris} kr</span>
+                </label>
+              ))}
+            </div>
           </div>
         </Steg>
 
@@ -300,12 +348,12 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
           <dl className="mt-4 space-y-3">
             <div>
               <dt className="text-gra">Behandling</dt>
-              <dd className="font-bold">{behandling || "Ikke valgt"}</dd>
+              <dd className="font-bold">{behandlingTekst || "Ikke valgt"}</dd>
             </div>
             {valgtBehandling && (
               <div>
                 <dt className="text-gra">Varighet</dt>
-                <dd className="tall font-bold">{valgtBehandling.tid}</dd>
+                <dd className="tall font-bold">{varighetTekst}</dd>
               </div>
             )}
             <div>
@@ -326,7 +374,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
             </div>
             <div className="border-t-2 border-linje pt-3">
               <dt className="text-gra">Pris</dt>
-              <dd className="tall text-[2rem] leading-none">{valgtBehandling ? `${valgtBehandling.pris} kr` : "–"}</dd>
+              <dd className="tall text-[2rem] leading-none">{prisTekst}</dd>
             </div>
           </dl>
           <button

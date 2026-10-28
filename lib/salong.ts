@@ -102,10 +102,10 @@ export const kategorier: Kategori[] = [
     ingress: "Fra en enkel stuss til en helt ny form. Vi starter alltid med fem minutter prat.",
     bilde: { src: b("frisyre-23-burgunder-presis-bob.webp"), alt: "Presis bob i burgunder.", w: 700, h: 1090 },
     behandlinger: [
-      { navn: "Dameklipp", pris: "690", tid: "60 min" },
-      { navn: "Klipp og føn", pris: "890", tid: "75 min" },
-      { navn: "Lugg", pris: "250", tid: "15 min" },
-      { navn: "Barn under 12 år", pris: "390", tid: "30 min" },
+      { navn: "Dameklipp", pris: "850", tid: "60 min" },
+      { navn: "Klipp og føn", pris: "1 090", tid: "75 min" },
+      { navn: "Lugg", pris: "290", tid: "15 min" },
+      { navn: "Barn under 12 år", pris: "490", tid: "30 min" },
     ],
   },
   {
@@ -115,10 +115,11 @@ export const kategorier: Kategori[] = [
     ingress: "Fade, krøller eller klassisk. Kasper har linjal i blikket.",
     bilde: { src: b("frisyre-19-herre-teksturert-fade.webp"), alt: "Herreklipp med krøllete topp og høy fade.", w: 700, h: 1468 },
     behandlinger: [
-      { navn: "Herreklipp", pris: "520", tid: "45 min" },
-      { navn: "Fade", pris: "590", tid: "45 min" },
-      { navn: "Skjegg", pris: "290", tid: "20 min" },
-      { navn: "Klipp og skjegg", pris: "750", tid: "60 min" },
+      { navn: "Herreklipp", pris: "650", tid: "45 min" },
+      { navn: "Fade", pris: "720", tid: "45 min" },
+      { navn: "Maskinklipp", pris: "420", tid: "20 min" },
+      { navn: "Skjegg", pris: "320", tid: "20 min" },
+      { navn: "Klipp og skjegg", pris: "890", tid: "60 min" },
     ],
   },
   {
@@ -128,11 +129,13 @@ export const kategorier: Kategori[] = [
     ingress: "Naturlig eller neon. Vi tester alltid på en lokk først når fargen er ny for deg.",
     bilde: { src: b("frisyre-13-rode-highlights-portrett.webp"), alt: "Mørkt hår med kraftige røde striper.", w: 700, h: 1591 },
     behandlinger: [
-      { navn: "Ettervekst", pris: "1 090", tid: "90 min" },
-      { navn: "Helfarge", pris: "fra 1 290", tid: "2 t" },
-      { navn: "Striper", pris: "fra 1 690", tid: "2 t" },
-      { navn: "Balayage", pris: "fra 2 490", tid: "3 t" },
-      { navn: "Sterke farger", pris: "fra 1 890", tid: "3 t", merknad: "Rødt, fuksia, lilla og andre farger som synes." },
+      { navn: "Ettervekst", pris: "1 190", tid: "75 min", merknad: "Samme farge som du har i lengdene." },
+      { navn: "Helfarge", pris: "fra 1 490", tid: "90 min", merknad: "Langt hår koster mer." },
+      { navn: "Striper", pris: "fra 1 890", tid: "2 t", merknad: "Trenger ofte toning etterpå." },
+      { navn: "Balayage", pris: "fra 2 590", tid: "3 t", merknad: "Trenger ofte toning etterpå." },
+      { navn: "Bleking", pris: "fra 2 490", tid: "3 t", merknad: "Til platina og isblond. Vi gir eksakt pris i stolen." },
+      { navn: "Glossing", pris: "890", tid: "45 min", merknad: "Frisker opp fargen og gir glans. Med vask og føn." },
+      { navn: "Sterke farger", pris: "fra 1 990", tid: "3 t", merknad: "Rødt, fuksia, lilla og andre farger som synes." },
     ],
   },
   {
@@ -142,9 +145,9 @@ export const kategorier: Kategori[] = [
     ingress: "Til fest, bryllup eller bare en fredag. Ronja får det til å sitte.",
     bilde: { src: b("frisyre-09-oppsatt-festhaar.webp"), alt: "Oppsatt festfrisyre med pyntenåler.", w: 700, h: 940 },
     behandlinger: [
-      { navn: "Føn og styling", pris: "490", tid: "40 min" },
-      { navn: "Oppsatt hår", pris: "fra 990", tid: "60 min" },
-      { navn: "Brudehår med prøve", pris: "fra 2 290", tid: "2 × 90 min" },
+      { navn: "Føn og styling", pris: "550", tid: "40 min" },
+      { navn: "Oppsatt hår", pris: "fra 1 190", tid: "60 min" },
+      { navn: "Brudehår med prøve", pris: "fra 2 490", tid: "2 × 90 min" },
     ],
   },
 ];
@@ -208,6 +211,12 @@ export const frisyrer: Frisyre[] = [
   f("26", "blond-salongstyling", "Blond bob med bølger", ["blond", "klipp"], "Skulderlang, blond bob med bølger i rosa lys fra salongen.", 1094),
 ];
 
+// Kan bare legges til en annen behandling, ikke bestilles alene.
+export const tillegg: Behandling[] = [
+  { navn: "Toning", pris: "550", tid: "30 min", merknad: "Gir riktig tone etter striper, balayage og bleking." },
+  { navn: "Kur", pris: "290", tid: "15 min", merknad: "Fukt og glans. Godt etter bleking." },
+];
+
 // Hvor mange minutter første time tar: «60 min», «2 t», «2 × 90 min».
 export function minutter(tid: string) {
   const del = tid.split("×").pop()!;
@@ -225,7 +234,8 @@ export function behandlingFor(f: Frisyre) {
   if (f.typer.includes("oppsatt")) return "Oppsatt hår";
   if (/fuksia|rosa|lilla/.test(n)) return "Sterke farger";
   if (n.includes("striper")) return "Striper";
-  if (f.typer.includes("farge") || /platina|isblond/.test(n)) return "Helfarge";
+  if (/platina|isblond/.test(n)) return "Bleking";
+  if (f.typer.includes("farge")) return "Helfarge";
   if (f.typer.includes("blond")) return "Striper";
   return "Dameklipp";
 }
