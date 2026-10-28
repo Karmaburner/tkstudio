@@ -71,8 +71,9 @@ export default function Forside() {
             <li key={k.slug} className="glid border-b-2 border-hvit">
               <Link
                 href={`/priser#${k.slug}`}
-                className="group relative grid items-center gap-x-8 gap-y-2 py-8 sm:grid-cols-[4rem_1fr_auto]"
-                style={{ paddingLeft: `min(${i * 7}vw, ${i * 5}rem)` }}
+                // Trappen: hvert trinn rykkes inn. Halvt så mye på mobil, så teksten får plass.
+                className="group relative grid items-center gap-x-8 gap-y-2 py-8 pl-[calc(var(--trinn)*3.5vw)] sm:grid-cols-[4rem_1fr_auto] sm:pl-[min(calc(var(--trinn)*7vw),calc(var(--trinn)*5rem))]"
+                style={{ "--trinn": i } as React.CSSProperties}
               >
                 <span aria-hidden="true" className="tall text-[1.25rem] text-lavendel">
                   0{i + 1}
