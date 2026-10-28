@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { salong } from "@/lib/salong";
-import { meny } from "./Header";
+import { meny } from "@/lib/meny";
 import { Monogram } from "./Logo";
 import { Apningstider } from "./Apningstider";
 

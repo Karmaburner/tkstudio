@@ -1,14 +1,8 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { Knapp } from "./Felles";
-
-export const meny = [
-  { href: "/frisyrer", tekst: "Frisyrer" },
-  { href: "/priser", tekst: "Priser" },
-  { href: "/#teamet", tekst: "Teamet" },
-  { href: "/#salongen", tekst: "Salongen" },
-  { href: "/#finn-oss", tekst: "Finn oss" },
-];
+import { MobilMeny } from "./MobilMeny";
+import { meny } from "@/lib/meny";
 
 export function Header() {
   return (
@@ -42,33 +36,7 @@ export function Header() {
           <Knapp href="/bestill-time">Bestill time</Knapp>
         </div>
 
-        {/* Mobilmeny med <details>: virker med tastatur og uten JavaScript. */}
-        <details className="relative lg:hidden">
-          {/* To streker i ulik lengde. Blir et kryss når menyen er åpen. */}
-          <summary className="flex h-12 w-12 items-center justify-center">
-            <span className="sr-only">Meny</span>
-            <span aria-hidden="true" className="hamburger relative block h-4 w-8">
-              <span className="strek-1 absolute right-0 top-0 h-[3px] w-8 bg-hvit transition-transform duration-300" />
-              <span className="strek-2 absolute bottom-0 right-0 h-[3px] w-5 bg-neon transition-all duration-300" />
-            </span>
-          </summary>
-          <div className="absolute right-0 z-40 mt-2 w-[min(20rem,calc(100vw-2rem))] border-2 border-hvit bg-kull p-3">
-            <nav aria-label="Mobilmeny">
-              <ul>
-                {meny.map((m) => (
-                  <li key={m.href}>
-                    <Link href={m.href} className="smal block px-3 py-2 text-[2rem] leading-none hover:text-neon-tekst">
-                      {m.tekst}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <Knapp href="/bestill-time" variant="lys" className="mt-3 w-full justify-center">
-              Bestill time
-            </Knapp>
-          </div>
-        </details>
+        <MobilMeny />
       </div>
     </header>
   );

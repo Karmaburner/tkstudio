@@ -1,13 +1,14 @@
 "use client";
 
-import { useMemo, useState, useSyncExternalStore } from "react";
-import { apningstider, kategorier, team } from "@/lib/salong";
+import { useState, useSyncExternalStore } from "react";
+import { alleBehandlinger, apningstider, kategorier, minutter, team } from "@/lib/salong";
 
 type Dag = { id: string; navn: string; dato: string; tider: string[] };
 
 // Lager ledige tider for de neste åpne dagene. Bare for demoen:
 // «opptatt» er tilfeldig, men likt hver gang for samme dag, tid og frisør.
-function lagDager(frisor: string): Dag[] {
+// Behandlingen må bli ferdig før stengetid, så lange behandlinger får færre tider.
+function lagDager(frisor: string, varighet: number): Dag[] {
   const dager: Dag[] = [];
   const d = new Date();
   d.setHours(12, 0, 0, 0);
@@ -20,8 +21,9 @@ function lagDager(frisor: string): Dag[] {
     const start = parseInt(apen.apner);
     const slutt = parseInt(apen.stenger);
     const tider: string[] = [];
-    for (let t = start; t < slutt - 1; t++) {
+    for (let t = start; t < slutt; t++) {
       for (const m of ["00", "30"]) {
+        if (t * 60 + parseInt(m) + varighet > slutt * 60) continue;
         const nokkel = `${d.toDateString()}${t}${m}${frisor}`;
         let h = 0;
         for (const c of nokkel) h = (h * 31 + c.charCodeAt(0)) >>> 0;
@@ -57,11 +59,13 @@ function Steg({ nr, tittel, children }: { nr: string; tittel: string; children: 
   );
 }
 
-export function Bestilling() {
-  const [behandling, setBehandling] = useState("");
-  const [frisor, setFrisor] = useState("forste");
+export function Bestilling({ start = {} }: { start?: { behandling?: string; frisor?: string } }) {
+  const [behandling, setBehandling] = useState(
+    alleBehandlinger.some((b) => b.navn === start.behandling) ? start.behandling! : "",
+  );
+  const [frisor, setFrisor] = useState(team.some((p) => p.slug === start.frisor) ? start.frisor! : "forste");
   const [dagId, setDagId] = useState("");
-  const [tid, setTid] = useState("");
+  const [valgtTid, setTid] = useState("");
   const [feil, setFeil] = useState<Feil>({});
   const [sendt, setSendt] = useState(false);
 
@@ -72,10 +76,14 @@ export function Bestilling() {
     () => true,
     () => false,
   );
-  const dager = useMemo(() => (klar ? lagDager(frisor) : []), [klar, frisor]);
+  const valgtBehandling = alleBehandlinger.find((b) => b.navn === behandling);
+  const varighet = valgtBehandling ? minutter(valgtBehandling.tid) : 30;
+  const anbefalt = valgtBehandling?.kategori.frisor;
+  const dager = klar ? lagDager(frisor, varighet) : [];
   const dag = dager.find((d) => d.id === dagId) ?? dager[0];
+  // En valgt tid som ikke lenger går (ny behandling eller frisør) teller som ikke valgt.
+  const tid = dag?.tider.includes(valgtTid) ? valgtTid : "";
 
-  const valgtBehandling = kategorier.flatMap((k) => k.behandlinger).find((b) => b.navn === behandling);
   const frisorNavn = frisor === "forste" ? "Første ledige" : team.find((p) => p.slug === frisor)?.navn;
 
   function send(e: React.FormEvent<HTMLFormElement>) {
@@ -135,7 +143,10 @@ export function Bestilling() {
                           onChange={() => setBehandling(b.navn)}
                           className="sr-only"
                         />
-                        <span className="font-bold">{b.navn}</span>
+                        <span>
+                          <span className="block font-bold">{b.navn}</span>
+                          <span className="tall block text-[0.9375rem]">{b.tid}</span>
+                        </span>
                       </span>
                       <span className="tall whitespace-nowrap">{b.pris} kr</span>
                     </label>
@@ -165,6 +176,11 @@ export function Bestilling() {
                   <span className="smal block text-[1.75rem] leading-none">{p.navn}</span>
                   <span className="mt-1 block text-[0.9375rem]">{p.rolle}</span>
                 </span>
+                {anbefalt === p.slug && (
+                  <span className="kutt-hjorne shrink-0 bg-lavendel px-2 py-1 text-[0.875rem] font-bold text-kull">
+                    Anbefalt for {behandling.toLowerCase()}
+                  </span>
+                )}
               </label>
             ))}
           </div>
@@ -201,6 +217,11 @@ export function Bestilling() {
                   </button>
                 ))}
               </div>
+              {dag?.tider.length === 0 && (
+                <p className="mt-6 text-gra">
+                  Ingen ledige tider som rekker {valgtBehandling?.navn.toLowerCase()} før stengetid denne dagen. Prøv en annen dag.
+                </p>
+              )}
               <div className="mt-6 grid grid-cols-3 gap-2 sm:grid-cols-6">
                 {dag?.tider.map((t) => (
                   <label key={t} className={`${kort} justify-center`}>
@@ -281,6 +302,12 @@ export function Bestilling() {
               <dt className="text-gra">Behandling</dt>
               <dd className="font-bold">{behandling || "Ikke valgt"}</dd>
             </div>
+            {valgtBehandling && (
+              <div>
+                <dt className="text-gra">Varighet</dt>
+                <dd className="tall font-bold">{valgtBehandling.tid}</dd>
+              </div>
+            )}
             <div>
               <dt className="text-gra">Frisør</dt>
               <dd className="font-bold">{frisorNavn}</dd>

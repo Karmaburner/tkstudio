@@ -17,7 +17,7 @@ export default function Forside() {
       {/* ---------- Toppen ---------- */}
       <section aria-labelledby="hero-tittel" className="relative isolate overflow-hidden">
         {/* Bildet åpnes på skrå som et saksekutt. Rett foto inni et skrått panel. */}
-        <div className="hero-bilde relative h-[52svh] min-h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[62%]">
+        <div className="hero-bilde relative h-[34svh] min-h-60 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[62%]">
           <Foto bilde={bilder.hero} prioritet sizes="(min-width: 1024px) 62vw, 100vw" className="hero-zoom h-full w-full object-cover" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-kull via-kull/30 to-transparent lg:bg-gradient-to-r lg:from-kull lg:via-kull/20" />
           {/* Et rødt saksekutt sveiper over bildet. Bildet skjules aldri, så det teller som vist med en gang (LCP). */}
@@ -27,7 +27,7 @@ export default function Forside() {
         {/* Kjempestor TK i omriss bak teksten. Bare pynt. */}
         <p
           aria-hidden="true"
-          className="smal omriss pointer-events-none absolute -left-6 top-[38svh] -z-10 select-none text-[48vw] leading-[0.8] opacity-40 lg:top-auto lg:bottom-[-6vw] lg:text-[34vw]"
+          className="smal omriss pointer-events-none absolute -left-6 top-[22svh] -z-10 select-none text-[48vw] leading-[0.8] opacity-40 lg:top-auto lg:bottom-[-6vw] lg:text-[34vw]"
         >
           TK
         </p>
@@ -38,10 +38,10 @@ export default function Forside() {
             <h1 id="hero-tittel" className="mt-10 text-[clamp(4.5rem,15vw,11.5rem)]">
               Hår med <span className="neontekst block text-neon">mening.</span>
             </h1>
-            <p className="mt-8 max-w-md text-[1.25rem] leading-relaxed">
+            <p className="mt-6 max-w-md text-[1.25rem] leading-relaxed lg:mt-8">
               Klipp, sterke farger og styling for deg som vil bli lagt merke til. Eller som bare vil ha en klipp som sitter.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-7 flex flex-wrap gap-4 lg:mt-10">
               <Knapp href="/bestill-time">Bestill time</Knapp>
               <Knapp href="/frisyrer" variant="omriss">
                 Se frisyrene
@@ -53,7 +53,7 @@ export default function Forside() {
         {/* Neonlinjen som klipper over toppen. */}
         <div
           aria-hidden="true"
-          className="hero-strek neonglod pointer-events-none absolute left-[-10%] top-[46svh] h-[3px] w-[130%] -rotate-[8deg] bg-neon lg:left-[48%] lg:top-[62%] lg:w-[62%] lg:-rotate-[16deg]"
+          className="hero-strek neonglod pointer-events-none absolute left-[-10%] top-[30svh] h-[3px] w-[130%] -rotate-[8deg] bg-neon lg:left-[48%] lg:top-[62%] lg:w-[62%] lg:-rotate-[16deg]"
         />
       </section>
 
@@ -62,7 +62,7 @@ export default function Forside() {
       </div>
 
       {/* ---------- Hva vi gjør: trapp av store ord ---------- */}
-      <section aria-labelledby="gjor-tittel" className="mx-auto mt-40 max-w-7xl px-4 sm:px-6">
+      <section aria-labelledby="gjor-tittel" className="mx-auto mt-24 max-w-7xl px-4 sm:px-6 lg:mt-40">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-end">
           <div>
             <Etikett>Det vi gjør</Etikett>
@@ -116,7 +116,7 @@ export default function Forside() {
       </section>
 
       {/* ---------- Frisyrer: skrå stripe ---------- */}
-      <section aria-labelledby="frisyre-tittel" className="mt-40">
+      <section aria-labelledby="frisyre-tittel" className="mt-24 lg:mt-40">
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-4 sm:px-6">
           <div>
             <Etikett>Frisyrer</Etikett>
@@ -152,7 +152,7 @@ export default function Forside() {
       </section>
 
       {/* ---------- Teamet ---------- */}
-      <section id="teamet" aria-labelledby="team-tittel" className="kutt-begge mt-32 scroll-mt-8 bg-fuksia py-[calc(3.5vw+5rem)]">
+      <section id="teamet" aria-labelledby="team-tittel" className="kutt-begge mt-20 scroll-mt-8 lg:mt-32 bg-fuksia py-[calc(3.5vw+5rem)]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Etikett farge="text-hvit">Teamet</Etikett>
           <h2 id="team-tittel" className="mt-4 max-w-5xl text-[clamp(3rem,9vw,7rem)]">
@@ -180,6 +180,9 @@ export default function Forside() {
                     </li>
                   ))}
                 </ul>
+                <Knapp href={`/bestill-time?frisor=${p.slug}`} variant="lys" className="mt-6">
+                  Bestill hos {p.navn}
+                </Knapp>
               </li>
             ))}
           </ul>
@@ -187,7 +190,7 @@ export default function Forside() {
       </section>
 
       {/* ---------- Salongen: asymmetrisk kollasj ---------- */}
-      <section id="salongen" aria-labelledby="salong-tittel" className="mx-auto mt-32 max-w-7xl scroll-mt-8 px-4 sm:px-6">
+      <section id="salongen" aria-labelledby="salong-tittel" className="mx-auto mt-20 max-w-7xl scroll-mt-8 lg:mt-32 px-4 sm:px-6">
         <div className="grid gap-4 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-5 md:pt-10">
             <Etikett>Salongen</Etikett>
@@ -243,7 +246,7 @@ export default function Forside() {
       </section>
 
       {/* ---------- Finn oss ---------- */}
-      <section id="finn-oss" aria-labelledby="finn-tittel" className="mx-auto mt-32 grid max-w-7xl scroll-mt-8 gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr_1.2fr]">
+      <section id="finn-oss" aria-labelledby="finn-tittel" className="mx-auto mt-20 grid max-w-7xl scroll-mt-8 lg:mt-32 gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr_1.2fr]">
         <div>
           <Etikett>Finn oss</Etikett>
           <h2 id="finn-tittel" className="mt-4 text-[clamp(3rem,6vw,4.5rem)]">

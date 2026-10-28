@@ -307,3 +307,38 @@ details[open] .strek-2 {
   width: 2rem;
   transform: translateY(-6.5px) rotate(-45deg);
 }
+
+/* Lysboksen i galleriet. Siden bak står stille mens den er åpen. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+.lysboks {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.lysboks::backdrop {
+  backdrop-filter: blur(4px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lysboks[open] {
+    animation: lysboks-inn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .lysboks-bilde {
+    animation: lysboks-bilde 0.4s ease-out;
+  }
+}
+@keyframes lysboks-inn {
+  from {
+    opacity: 0;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  to {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+@keyframes lysboks-bilde {
+  from {
+    opacity: 0;
+  }
+}

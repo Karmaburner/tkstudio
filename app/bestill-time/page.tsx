@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { SideTopp } from "@/components/Felles";
 import { salong } from "@/lib/salong";
 import { Bestilling } from "./Bestilling";
+import { BestillingFraLenke } from "./FraLenke";
 
 export const metadata: Metadata = {
   title: "Bestill time",
@@ -21,7 +23,10 @@ export default function BestillTime() {
         </p>
       </SideTopp>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Bestilling />
+        {/* Den statiske siden viser et tomt skjema. Valg fra lenken legges på i nettleseren. */}
+        <Suspense fallback={<Bestilling />}>
+          <BestillingFraLenke />
+        </Suspense>
       </div>
     </>
   );

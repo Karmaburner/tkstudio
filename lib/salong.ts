@@ -91,11 +91,13 @@ export const team: Frisor[] = [
 ];
 
 export type Behandling = { navn: string; pris: string; tid: string; merknad?: string };
-export type Kategori = { slug: string; tittel: string; ingress: string; bilde: Bilde; behandlinger: Behandling[] };
+// frisor: den som anbefales i bestillingen når noen velger en behandling herfra.
+export type Kategori = { slug: string; tittel: string; ingress: string; frisor: string; bilde: Bilde; behandlinger: Behandling[] };
 
 export const kategorier: Kategori[] = [
   {
     slug: "klipp",
+    frisor: "kasper",
     tittel: "Klipp",
     ingress: "Fra en enkel stuss til en helt ny form. Vi starter alltid med fem minutter prat.",
     bilde: { src: b("frisyre-23-burgunder-presis-bob.webp"), alt: "Presis bob i burgunder.", w: 700, h: 1090 },
@@ -108,6 +110,7 @@ export const kategorier: Kategori[] = [
   },
   {
     slug: "herre",
+    frisor: "kasper",
     tittel: "Herre",
     ingress: "Fade, krøller eller klassisk. Kasper har linjal i blikket.",
     bilde: { src: b("frisyre-19-herre-teksturert-fade.webp"), alt: "Herreklipp med krøllete topp og høy fade.", w: 700, h: 1468 },
@@ -120,6 +123,7 @@ export const kategorier: Kategori[] = [
   },
   {
     slug: "farge",
+    frisor: "tiril",
     tittel: "Farge",
     ingress: "Naturlig eller neon. Vi tester alltid på en lokk først når fargen er ny for deg.",
     bilde: { src: b("frisyre-13-rode-highlights-portrett.webp"), alt: "Mørkt hår med kraftige røde striper.", w: 700, h: 1591 },
@@ -133,6 +137,7 @@ export const kategorier: Kategori[] = [
   },
   {
     slug: "styling",
+    frisor: "ronja",
     tittel: "Styling",
     ingress: "Til fest, bryllup eller bare en fredag. Ronja får det til å sitte.",
     bilde: { src: b("frisyre-09-oppsatt-festhaar.webp"), alt: "Oppsatt festfrisyre med pyntenåler.", w: 700, h: 940 },
@@ -191,3 +196,25 @@ export const frisyrer: Frisyre[] = [
   f("21", "myke-beige-bolger-bak", "Beige bølger", ["blond"], "Myke, beigeblonde bølger, sett bakfra.", 1113),
   f("26", "blond-salongstyling", "Blond bob med bølger", ["blond", "klipp"], "Skulderlang, blond bob med bølger i rosa lys fra salongen.", 1094),
 ];
+
+// Hvor mange minutter første time tar: «60 min», «2 t», «2 × 90 min».
+export function minutter(tid: string) {
+  const del = tid.split("×").pop()!;
+  const tall = parseInt(del);
+  return del.includes(" t") ? tall * 60 : tall;
+}
+
+export const alleBehandlinger = kategorier.flatMap((k) => k.behandlinger.map((b) => ({ ...b, kategori: k })));
+
+// Hvilken behandling i prislisten som gir en frisyre fra galleriet.
+export function behandlingFor(f: Frisyre) {
+  const n = f.navn.toLowerCase();
+  if (n.includes("balayage")) return "Balayage";
+  if (f.typer.includes("herre")) return n.includes("fade") ? "Fade" : "Herreklipp";
+  if (f.typer.includes("oppsatt")) return "Oppsatt hår";
+  if (/fuksia|rosa|lilla/.test(n)) return "Sterke farger";
+  if (n.includes("striper")) return "Striper";
+  if (f.typer.includes("farge") || /platina|isblond/.test(n)) return "Helfarge";
+  if (f.typer.includes("blond")) return "Striper";
+  return "Dameklipp";
+}
