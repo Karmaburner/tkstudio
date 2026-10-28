@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Priser() {
   return (
     <>
-      <SideTopp etikett="Priser" tittel={<>Ingen <span className="text-neon">overraskelser</span></>}>
+      <SideTopp etikett="Priser" tittel={<>Ingen <span className="text-lavendel">overraskelser</span></>}>
         <p>
           Prisene gjelder vanlig lengde. Har du veldig langt eller tykt hår, sier vi fra før vi begynner. Står det «fra», får du en
           fast pris i stolen.

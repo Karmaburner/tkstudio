@@ -11,7 +11,7 @@ export function Footer() {
         <div>
           <Monogram className="h-16 w-auto text-hvit" />
           <p className="smal mt-6 text-[3rem] leading-none">
-            Hår med <span className="text-neon">kant</span>
+            Hår på <span className="text-neon">kanten</span>
           </p>
           <address className="mt-6 not-italic leading-relaxed">
             {salong.gate}, <span className="tall">{salong.postnr}</span> {salong.sted}

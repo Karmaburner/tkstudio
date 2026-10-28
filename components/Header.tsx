@@ -44,10 +44,12 @@ export function Header() {
 
         {/* Mobilmeny med <details>: virker med tastatur og uten JavaScript. */}
         <details className="relative lg:hidden">
-          <summary className="flex h-12 items-center gap-3 border-2 border-hvit px-4 font-bold">
-            Meny
-            <span aria-hidden="true" className="pil inline-block text-[1.5rem] leading-none text-neon transition-transform">
-              +
+          {/* To streker i ulik lengde. Blir et kryss når menyen er åpen. */}
+          <summary className="flex h-12 w-12 items-center justify-center">
+            <span className="sr-only">Meny</span>
+            <span aria-hidden="true" className="hamburger relative block h-4 w-8">
+              <span className="strek-1 absolute right-0 top-0 h-[3px] w-8 bg-hvit transition-transform duration-300" />
+              <span className="strek-2 absolute bottom-0 right-0 h-[3px] w-5 bg-neon transition-all duration-300" />
             </span>
           </summary>
           <div className="absolute right-0 z-40 mt-2 w-[min(20rem,calc(100vw-2rem))] border-2 border-hvit bg-kull p-3">

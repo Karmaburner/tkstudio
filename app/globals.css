@@ -18,7 +18,9 @@
 
 /* Fargeroller (kontrast sjekket med kontrast.py):
    kull: bunn. flate: kort og paneler. hvit: tekst. gra: dempet tekst (9,4:1).
-   neon: bare store titler, linjer og flater, aldri liten tekst (4,46:1).
+   neon: «Bestill time», «kanten.» i toppen, linjer og hover. Rødt skal være den viktigste handlingen,
+   så uthevede ord i titler er lavendel, og feilmeldinger er hvite med lavendel merke (se Brain: rødt i UI).
+   Aldri liten tekst (4,46:1).
    neon-tekst: liten rød tekst på mørk bunn (5,8:1).
    rod: knapper med hvit tekst (5,5:1). fuksia: flater med hvit tekst (8,2:1).
    lavendel: små detaljer og etiketter på mørk bunn (8,4:1).
@@ -116,11 +118,11 @@ p {
   font-weight: 700;
   color: var(--color-hvit);
   text-decoration-line: underline;
-  text-decoration-color: var(--color-neon);
+  text-decoration-color: var(--color-lavendel);
   text-decoration-thickness: 3px;
   text-underline-offset: 6px;
   &:hover {
-    text-decoration-color: var(--color-lavendel);
+    text-decoration-color: var(--color-neon);
   }
 }
 
@@ -165,6 +167,14 @@ p {
   }
   to {
     transform: scaleX(1);
+  }
+}
+@keyframes flytt {
+  from {
+    transform: translateY(1.25rem);
+  }
+  to {
+    transform: none;
   }
 }
 @keyframes opp {
@@ -223,7 +233,7 @@ p {
     animation: strek 0.9s cubic-bezier(0.7, 0, 0.2, 1) 0.9s both;
   }
   .hero-opp {
-    animation: opp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: flytt 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
   .flimmer {
     animation: flimmer 6s linear infinite;
@@ -275,6 +285,11 @@ details > summary {
 details > summary::-webkit-details-marker {
   display: none;
 }
-details[open] .pil {
-  transform: rotate(45deg);
+/* Hamburgeren: lang hvit strek over en kortere rød. Åpen meny gir et kryss. */
+details[open] .strek-1 {
+  transform: translateY(6.5px) rotate(45deg);
+}
+details[open] .strek-2 {
+  width: 2rem;
+  transform: translateY(-6.5px) rotate(-45deg);
 }

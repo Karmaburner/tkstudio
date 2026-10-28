@@ -44,7 +44,7 @@ const punkter = [
 export default function OmDemoen() {
   return (
     <>
-      <SideTopp etikett="Om demoen" tittel={<>En salong som <span className="text-neon">ikke finnes</span></>}>
+      <SideTopp etikett="Om demoen" tittel={<>En salong som <span className="text-lavendel">ikke finnes</span></>}>
         <p>
           TK Studio er laget av Lilit Labs for å vise hva en frisørsalong kan få: en side med like mye personlighet som salongen selv.
         </p>

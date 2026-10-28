@@ -114,7 +114,8 @@ export function Bestilling() {
       <div className="space-y-16">
         <Steg nr="01" tittel="Hva skal vi gjøre?">
           {feil.behandling && (
-            <p id="behandling-feil" className="mb-4 font-bold text-neon-tekst">
+            <p id="behandling-feil" className="mb-4 flex items-start gap-2 border-l-4 border-lavendel bg-flate px-3 py-2 font-bold text-hvit">
+              <span aria-hidden="true" className="text-lavendel">!</span>
               {feil.behandling}
             </p>
           )}
@@ -171,7 +172,8 @@ export function Bestilling() {
 
         <Steg nr="03" tittel="Når passer det?">
           {feil.tid && (
-            <p id="tid-feil" className="mb-4 font-bold text-neon-tekst">
+            <p id="tid-feil" className="mb-4 flex items-start gap-2 border-l-4 border-lavendel bg-flate px-3 py-2 font-bold text-hvit">
+              <span aria-hidden="true" className="text-lavendel">!</span>
               {feil.tid}
             </p>
           )}
@@ -233,7 +235,8 @@ export function Bestilling() {
                 aria-describedby={feil.navn ? "navn-feil" : undefined}
               />
               {feil.navn && (
-                <p id="navn-feil" className="mt-2 font-bold text-neon-tekst">
+                <p id="navn-feil" className="mt-2 flex items-start gap-2 border-l-4 border-lavendel bg-flate px-3 py-2 font-bold text-hvit">
+              <span aria-hidden="true" className="text-lavendel">!</span>
                   {feil.navn}
                 </p>
               )}
@@ -253,7 +256,8 @@ export function Bestilling() {
                 aria-describedby={feil.telefon ? "telefon-feil" : undefined}
               />
               {feil.telefon && (
-                <p id="telefon-feil" className="mt-2 font-bold text-neon-tekst">
+                <p id="telefon-feil" className="mt-2 flex items-start gap-2 border-l-4 border-lavendel bg-flate px-3 py-2 font-bold text-hvit">
+              <span aria-hidden="true" className="text-lavendel">!</span>
                   {feil.telefon}
                 </p>
               )}

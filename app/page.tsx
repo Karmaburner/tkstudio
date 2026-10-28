@@ -32,9 +32,9 @@ export default function Forside() {
 
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col px-4 pb-24 pt-2 sm:px-6 lg:min-h-[calc(100svh-4.5rem)] lg:justify-center lg:py-24">
           <div className="hero-opp max-w-2xl">
-            <Etikett>Frisør i {salong.sted}</Etikett>
+            <Etikett>Frisøren i {salong.sted}</Etikett>
             <h1 id="hero-tittel" className="mt-5 text-[clamp(4.5rem,15vw,11.5rem)]">
-              Hår med <span className="neontekst block text-neon">kant.</span>
+              Hår på <span className="neontekst block text-neon">kanten.</span>
             </h1>
             <p className="mt-8 max-w-md text-[1.25rem] leading-relaxed">
               Klipp, sterke farger og styling for deg som vil bli lagt merke til. Eller som bare vil ha en klipp som sitter.
@@ -65,7 +65,7 @@ export default function Forside() {
           <div>
             <Etikett>Det vi gjør</Etikett>
             <h2 id="gjor-tittel" className="mt-4 text-[clamp(3rem,8vw,6rem)]">
-              Fire ting. <span className="text-neon">Gjort skikkelig.</span>
+              Fire ting. <span className="text-lavendel">Gjort skikkelig.</span>
             </h2>
           </div>
           <p className="max-w-prose text-[1.1875rem] text-gra lg:pb-3">
@@ -119,7 +119,7 @@ export default function Forside() {
           <div>
             <Etikett>Frisyrer</Etikett>
             <h2 id="frisyre-tittel" className="mt-4 text-[clamp(3rem,8vw,6rem)]">
-              <span className="tall">26</span> måter å <span className="text-neon">bli sett</span> på
+              <span className="tall">26</span> måter å <span className="text-lavendel">bli sett</span> på
             </h2>
           </div>
           <Knapp href="/frisyrer" variant="omriss">
@@ -190,7 +190,7 @@ export default function Forside() {
           <div className="md:col-span-5 md:pt-10">
             <Etikett>Salongen</Etikett>
             <h2 id="salong-tittel" className="mt-4 text-[clamp(3rem,7vw,5.5rem)]">
-              Svart, rødt og <span className="text-neon">litt for mye</span> neon
+              Svart, rødt og <span className="text-lavendel">litt for mye</span> neon
             </h2>
             <p className="mt-6 max-w-prose text-[1.1875rem] text-gra">
               Seks stoler, to vasker og en sofa du ikke vil reise deg fra. Kaffen er god, musikken er høy nok, og ingen spør om du
