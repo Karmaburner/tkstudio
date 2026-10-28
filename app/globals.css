@@ -206,14 +206,6 @@ p {
   96% { opacity: 0.7; }
   97% { opacity: 1; }
 }
-@keyframes bandet {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
 @keyframes rotere {
   to {
     transform: rotate(360deg);
@@ -250,12 +242,6 @@ p {
   }
   .rotere {
     animation: rotere 18s linear infinite;
-  }
-  .bandet {
-    animation: bandet 38s linear infinite;
-  }
-  .bandet-pause .bandet {
-    animation-play-state: paused;
   }
 
   /* Rullestyrt: innhold glir inn, og neonstreker tegnes når de kommer i bildet.

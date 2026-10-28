@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Bandet } from "@/components/Bandet";
 import { Apningstider } from "@/components/Apningstider";
 import { Etikett, Foto, Knapp } from "@/components/Felles";
 import { bilder, frisyrer, kategorier, salong, team } from "@/lib/salong";
@@ -56,10 +55,6 @@ export default function Forside() {
           className="hero-strek neonglod pointer-events-none absolute left-[-10%] top-[30svh] h-[3px] w-[130%] -rotate-[8deg] bg-neon lg:left-[48%] lg:top-[62%] lg:w-[62%] lg:-rotate-[16deg]"
         />
       </section>
-
-      <div className="mt-4">
-        <Bandet ord={["Klipp", "Farge", "Balayage", "Fade", "Bob", "Pixie", "Oppsatt", "Brudehår", "Sterke farger"]} />
-      </div>
 
       {/* ---------- Hva vi gjør: trapp av store ord ---------- */}
       <section aria-labelledby="gjor-tittel" className="mx-auto mt-24 max-w-7xl px-4 sm:px-6 lg:mt-40">
