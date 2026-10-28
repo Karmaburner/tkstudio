@@ -18,10 +18,10 @@ export default function Forside() {
       <section aria-labelledby="hero-tittel" className="relative isolate overflow-hidden">
         {/* Bildet åpnes på skrå som et saksekutt. Rett foto inni et skrått panel. */}
         <div className="hero-bilde relative h-[52svh] min-h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[62%]">
-          <Foto bilde={bilder.hero} prioritet sizes="(min-width: 1024px) 62vw, 100vw" className="h-full w-full object-cover" />
+          <Foto bilde={bilder.hero} prioritet sizes="(min-width: 1024px) 62vw, 100vw" className="hero-zoom h-full w-full object-cover" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-kull via-kull/30 to-transparent lg:bg-gradient-to-r lg:from-kull lg:via-kull/20" />
-          {/* Svart panel som klippes bort på skrå. Bildet ligger klart under, så det teller som vist med en gang. */}
-          <div aria-hidden="true" className="hero-dekke absolute inset-0 bg-kull" />
+          {/* Et rødt saksekutt sveiper over bildet. Bildet skjules aldri, så det teller som vist med en gang (LCP). */}
+          <div aria-hidden="true" className="hero-blad pointer-events-none absolute inset-y-0 left-0 w-1/4 -skew-x-[24deg] bg-gradient-to-r from-transparent via-neon/45 to-transparent opacity-0" />
         </div>
 
         {/* Kjempestor TK i omriss bak teksten. Bare pynt. */}
