@@ -5,10 +5,10 @@
   --color-flate: #1e1b24;
   --color-hvit: #f7f3f6;
   --color-gra: #bdb4c2;
-  --color-neon: #ef2138;
-  --color-neon-tekst: #ff4d5e;
-  --color-rod: #c21a2e;
-  --color-fuksia: #841b65;
+  --color-neon: #b54259;
+  --color-neon-tekst: #e28a9b;
+  --color-rod: #a93b51;
+  --color-fuksia: #713051;
   --color-lavendel: #b8a6c9;
   --color-linje: #5e5466;
 
@@ -223,16 +223,12 @@ p {
 .hero-bilde {
   clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
 }
+/* Dempet glød: gir dybde, men lyser ikke som et skilt. */
 .neonglod {
-  box-shadow:
-    0 0 6px var(--color-neon),
-    0 0 22px color-mix(in srgb, var(--color-neon) 70%, transparent),
-    0 0 60px color-mix(in srgb, var(--color-neon) 40%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-neon) 45%, transparent);
 }
 .neontekst {
-  text-shadow:
-    0 0 8px color-mix(in srgb, var(--color-neon) 80%, transparent),
-    0 0 28px color-mix(in srgb, var(--color-neon) 50%, transparent);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--color-neon) 35%, transparent);
 }
 
 @media (prefers-reduced-motion: no-preference) {
