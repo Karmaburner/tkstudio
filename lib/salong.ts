@@ -136,6 +136,7 @@ export const kategorier: Kategori[] = [
       { navn: "Bleking", pris: "fra 2 490", tid: "3 t", merknad: "Til platina og isblond. Vi gir eksakt pris i stolen." },
       { navn: "Glossing", pris: "890", tid: "45 min", merknad: "Frisker opp fargen og gir glans. Med vask og føn." },
       { navn: "Sterke farger", pris: "fra 1 990", tid: "3 t", merknad: "Rødt, fuksia, lilla og andre farger som synes." },
+      { navn: "Konsultasjon", pris: "0", tid: "15 min", merknad: "Gratis prat før en stor forandring. Vi ser på håret ditt og gir deg en pris." },
     ],
   },
   {

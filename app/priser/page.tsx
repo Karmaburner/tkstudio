@@ -51,8 +51,14 @@ export default function Priser() {
                     </div>
                     <p className="tall text-right text-[clamp(1.75rem,4vw,2.75rem)] leading-none">
                       {b.pris.startsWith("fra") && <span className="mr-2 font-sans text-[1rem] font-normal text-gra">fra</span>}
-                      {b.pris.replace("fra ", "")}
-                      <span className="ml-1 text-[1rem] text-gra">kr</span>
+                      {b.pris === "0" ? (
+                        "Gratis"
+                      ) : (
+                        <>
+                          {b.pris.replace("fra ", "")}
+                          <span className="ml-1 text-[1rem] text-gra">kr</span>
+                        </>
+                      )}
                     </p>
                   </li>
                 ))}
@@ -89,7 +95,7 @@ export default function Priser() {
 
         <div className="flex flex-wrap items-center gap-6 border-t-2 border-hvit pt-10">
           <p className="smal text-[clamp(2.5rem,6vw,4rem)] leading-none">Usikker på hva du trenger?</p>
-          <Knapp href="/bestill-time">Bestill en prat først</Knapp>
+          <Knapp href="/bestill-time?behandling=Konsultasjon">Bestill en gratis prat</Knapp>
         </div>
       </div>
     </>

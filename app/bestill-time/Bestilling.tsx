@@ -84,9 +84,11 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
   const valgteTillegg = tillegg.filter((t) => ekstra.includes(t.navn));
   const varighet = (valgtBehandling ? minutter(valgtBehandling.tid) : 30) + valgteTillegg.reduce((sum, t) => sum + minutter(t.tid), 0);
   const sum = valgtBehandling ? kroner(valgtBehandling.pris) + valgteTillegg.reduce((s, t) => s + kroner(t.pris), 0) : 0;
-  const prisTekst = valgtBehandling
-    ? `${valgtBehandling.pris.startsWith("fra") ? "fra " : ""}${sum.toLocaleString("nb-NO")} kr`
-    : "–";
+  const prisTekst = !valgtBehandling
+    ? "–"
+    : sum === 0
+      ? "Gratis"
+      : `${valgtBehandling.pris.startsWith("fra") ? "fra " : ""}${sum.toLocaleString("nb-NO")} kr`;
   const timer = Math.floor(varighet / 60);
   const varighetTekst = [timer ? `${timer} t` : "", varighet % 60 ? `${varighet % 60} min` : ""].filter(Boolean).join(" ");
   const behandlingTekst = [behandling, ...ekstra].filter(Boolean).join(" + ");
@@ -160,7 +162,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                           <span className="tall block text-[0.9375rem]">{b.tid}</span>
                         </span>
                       </span>
-                      <span className="tall whitespace-nowrap">{b.pris} kr</span>
+                      <span className="tall whitespace-nowrap">{b.pris === "0" ? "Gratis" : `${b.pris} kr`}</span>
                     </label>
                   ))}
                 </div>

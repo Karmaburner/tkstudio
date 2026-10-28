@@ -61,8 +61,8 @@ export default function Forside() {
             </h2>
           </div>
           <p className="max-w-prose text-[1.1875rem] text-gra lg:pb-3">
-            Vi har ikke tjue tilbud på menyen. Vi har fire, og vi er gode på dem. Alle priser står åpent, og du får vite hva det
-            koster før vi begynner.
+            Klipp, herre, farge og styling. Fra en enkel stuss til en helt ny farge, og alt innenfor de fire er noe vi kan
+            skikkelig. Prisene står åpent, og du får vite hva det koster før vi begynner.
           </p>
         </div>
 
