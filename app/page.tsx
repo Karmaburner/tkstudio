@@ -49,11 +49,6 @@ export default function Forside() {
           </div>
         </div>
 
-        {/* Neonlinjen som klipper over toppen. */}
-        <div
-          aria-hidden="true"
-          className="hero-strek neonglod pointer-events-none absolute left-[-10%] top-[30svh] h-[3px] w-[130%] -rotate-[8deg] bg-neon lg:left-[48%] lg:top-[62%] lg:w-[62%] lg:-rotate-[16deg]"
-        />
       </section>
 
       {/* ---------- Hva vi gjør: trapp av store ord ---------- */}
