@@ -304,7 +304,7 @@ export function Bestilling() {
           </dl>
           <button
             type="submit"
-            className="kutt-hjorne mt-6 flex min-h-12 w-full items-center justify-center gap-3 bg-rod px-6 py-3 font-bold text-hvit transition-colors hover:bg-neon hover:text-kull"
+            className="kutt-hjorne mt-6 flex min-h-12 w-full items-center justify-center gap-3 bg-rod px-6 py-3 font-bold text-hvit transition-colors hover:bg-hvit hover:text-kull"
           >
             Bestill time <span aria-hidden="true">→</span>
           </button>
