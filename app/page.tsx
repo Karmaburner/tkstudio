@@ -7,7 +7,7 @@ import { bilder, frisyrer, kategorier, salong, team } from "@/lib/salong";
 const laveste = (k: (typeof kategorier)[number]) => k.behandlinger[0].pris.replace("fra ", "");
 
 // Et utvalg til stripa på forsiden. Hele galleriet ligger på /frisyrer.
-const utvalg = ["Rød balayage", "Teksturert fade", "Fuksia bob", "Festfrisyre", "Platina pixie", "Rosa og lilla ombré", "Burgunder bob", "Kobberkrøller"]
+const utvalg = ["Burgunderbølger", "Rød balayage", "Teksturert fade", "Fuksia bob", "Festfrisyre", "Platina pixie", "Rosa og lilla ombré", "Burgunder bob", "Kobberkrøller"]
   .map((n) => frisyrer.find((f) => f.navn === n)!)
   .filter(Boolean);
 
@@ -141,7 +141,7 @@ export default function Forside() {
               <li key={f.navn} className={`w-[15rem] shrink-0 sm:w-[18rem] ${i % 2 ? "mt-16" : ""}`}>
                 <figure className="group">
                   <div className="overflow-hidden [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)]">
-                    <Foto bilde={f.bilde} className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
+                    <Foto bilde={f.bilde} sizes="18rem" className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
                   </div>
                   <figcaption className="smal mt-3 pl-3 text-[1.625rem] leading-none group-hover:text-neon-tekst">{f.navn}</figcaption>
                 </figure>

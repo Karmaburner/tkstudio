@@ -53,6 +53,16 @@ await sharp(fs.readFileSync(path.join(kilde, "01_Salong/01_hero_salong_med_logo.
   .webp({ quality: 72 })
   .toFile(path.join(ut, "salong-hero-720.webp"));
 
+// Nye enkeltfoto i 1024 x 1536. Stor fil til lysboksen, 700 px til rutenettet.
+const enkeltfoto = {
+  "bilder-original/TK_Studio_eksempel_enkeltfoto/TK_Studio_01_burgunder_bolger.png": "frisyre-27-burgunder-bolger",
+};
+for (const [fra, til] of Object.entries(enkeltfoto)) {
+  const buf = fs.readFileSync(fra);
+  await sharp(buf).webp({ quality: 80 }).toFile(path.join(ut, `${til}.webp`));
+  await sharp(buf).resize(700).webp({ quality: 78 }).toFile(path.join(ut, `${til}-700.webp`));
+}
+
 // Delingsbilde 1200 x 630 fra heltebildet, som har logoen på veggen.
 await sharp(fs.readFileSync(path.join(kilde, "01_Salong/01_hero_salong_med_logo.png")))
   .resize(1200, 630, { fit: "cover", position: "centre" })

@@ -169,6 +169,18 @@ const f = (nr: string, fil: string, navn: string, typer: FrisyreType[], alt: str
 });
 
 export const frisyrer: Frisyre[] = [
+  // Nytt enkeltfoto i full oppløsning. Lysboksen får 1024 px, rutenettet 700 px.
+  {
+    navn: "Burgunderbølger",
+    typer: ["farge"],
+    bilde: {
+      src: b("frisyre-27-burgunder-bolger.webp"),
+      srcSet: `${b("frisyre-27-burgunder-bolger-700.webp")} 700w, ${b("frisyre-27-burgunder-bolger.webp")} 1024w`,
+      alt: "Langt hår i dyp burgunder med myke bølger, sett over skulderen i salongen.",
+      w: 1024,
+      h: 1536,
+    },
+  },
   f("01", "rod-balayage-lange-bolger", "Rød balayage", ["farge"], "Langt, mørkt hår med røde bølger som blir lysere mot tuppene.", 787),
   f("23", "burgunder-presis-bob", "Burgunder bob", ["farge", "klipp"], "Presis bob i burgunder med mørk rot.", 1090),
   f("19", "herre-teksturert-fade", "Teksturert fade", ["herre"], "Herreklipp med krøllete topp og høy fade.", 1468),
@@ -188,7 +200,6 @@ export const frisyrer: Frisyre[] = [
   f("10", "halvoppsatt-med-flette", "Halvoppsatt med flette", ["oppsatt", "blond"], "Halvoppsatt, langt, blondt hår med tvunnet flette og hårspenne.", 890),
   f("16", "kobber-lange-bolger", "Lange kobberbølger", ["farge"], "Lange, kobberrøde bølger.", 1204),
   f("17", "kort-platina-pixie", "Pixie med lugg", ["blond", "klipp"], "Kort platinablond pixie med lang lugg.", 1185),
-  f("11", "vinrod-lange-bolger-bak", "Vinrøde bølger", ["farge"], "Langt hår i vinrødt med mørk rot, sett bakfra.", 867),
   f("05", "honningblond-volum", "Honningblond", ["blond"], "Langt, honningblondt hår med volum og store bølger.", 765),
   f("15", "brun-balayage-lag", "Brun balayage i lag", ["farge", "klipp"], "Langt, brunt hår i lag med lys balayage.", 1223),
   f("18", "rett-platinablondt-haar", "Rett platina", ["blond"], "Langt, rett, platinablondt hår.", 1558),

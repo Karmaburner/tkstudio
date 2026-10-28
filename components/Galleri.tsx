@@ -57,6 +57,7 @@ export function Galleri() {
               <span className="relative block overflow-hidden bg-flate">
                 <Foto
                   bilde={f.bilde}
+                  sizes="(min-width: 1024px) 22vw, (min-width: 768px) 30vw, 46vw"
                   className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-105 group-hover:saturate-150"
                 />
                 <span
@@ -99,6 +100,8 @@ export function Galleri() {
               <img
                 key={vist.bilde.src}
                 src={vist.bilde.src}
+                srcSet={vist.bilde.srcSet}
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 alt={vist.bilde.alt}
                 width={vist.bilde.w}
                 height={vist.bilde.h}
