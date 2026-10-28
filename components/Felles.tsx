@@ -55,6 +55,7 @@ export function Foto({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={bilde.src}
+      srcSet={bilde.srcSet}
       alt={bilde.alt}
       width={bilde.w}
       height={bilde.h}

@@ -31,10 +31,10 @@ export const apningstider: Dag[] = [
   { dag: "Søndag", apner: null, stenger: null, schema: "Sunday" },
 ];
 
-export type Bilde = { src: string; alt: string; w: number; h: number };
+export type Bilde = { src: string; alt: string; w: number; h: number; srcSet?: string };
 
 export const bilder = {
-  hero: { src: b("salong-hero.webp"), alt: "Salongen innenfra: svarte stoler, røde neonlister og TK Studio-skiltet på veggen bak skranken.", w: 1030, h: 565 },
+  hero: { src: b("salong-hero.webp"), srcSet: `${b("salong-hero-720.webp")} 720w, ${b("salong-hero.webp")} 1030w`, alt: "Salongen innenfra: svarte stoler, røde neonlister og TK Studio-skiltet på veggen bak skranken.", w: 1030, h: 565 },
   resepsjon: { src: b("salong-resepsjon.webp"), alt: "Resepsjonen med logoen på en svart vegg og stylingplassene langs speilene.", w: 1000, h: 481 },
   inngang: { src: b("salong-inngang.webp"), alt: "Salongen sett fra inngangen, med skranken i svart marmor og en rød diagonal gjennom den.", w: 1000, h: 684 },
   stasjoner: { src: b("salong-stasjoner.webp"), alt: "En lang rekke stylingstasjoner med speil innrammet av rødt lys.", w: 1000, h: 564 },

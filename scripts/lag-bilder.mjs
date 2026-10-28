@@ -47,6 +47,12 @@ for (const [fra, til] of Object.entries(filer)) {
   else await sharp(buf).webp({ quality: 80 }).toFile(path.join(ut, til));
 }
 
+// Mindre toppbilde til mobil.
+await sharp(fs.readFileSync(path.join(kilde, "01_Salong/01_hero_salong_med_logo.png")))
+  .resize(720)
+  .webp({ quality: 72 })
+  .toFile(path.join(ut, "salong-hero-720.webp"));
+
 // Delingsbilde 1200 x 630 fra heltebildet, som har logoen på veggen.
 await sharp(fs.readFileSync(path.join(kilde, "01_Salong/01_hero_salong_med_logo.png")))
   .resize(1200, 630, { fit: "cover", position: "centre" })

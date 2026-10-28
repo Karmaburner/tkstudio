@@ -16,6 +16,8 @@ const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
   axes: ["wdth"],
+  // 90 KB. Forhåndslastet konkurrerte den med toppbildet på tregt mobilnett.
+  preload: false,
 });
 
 export const metadata: Metadata = {
