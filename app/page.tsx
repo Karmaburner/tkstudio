@@ -36,7 +36,8 @@ export default function Forside() {
           <div className="hero-opp max-w-2xl">
             <Etikett>Frisøren i {salong.sted}</Etikett>
             <h1 id="hero-tittel" className="mt-10 text-[clamp(4.5rem,15vw,11.5rem)]">
-              Hår med <span className="block text-lavendel">mening.</span>
+              <span className="block text-[0.5em]">Hår med</span>{" "}
+              <span className="block text-lavendel">mening.</span>
             </h1>
             <p className="mt-6 max-w-md text-[1.25rem] leading-relaxed lg:mt-8">
               Klipp, sterke farger og styling for deg som vil bli lagt merke til. Eller som bare vil ha en klipp som sitter.

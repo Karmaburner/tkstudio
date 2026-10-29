@@ -57,6 +57,10 @@ body {
     word-spacing: 0.1em;
     text-wrap: balance;
   }
+  /* Deler av en tittel i en annen størrelse regner avstanden ut fra sin egen størrelse. */
+  :is(h1, h2, h3) span {
+    letter-spacing: clamp(-0.045em, calc((32px - 1em) * 0.08), 0px);
+  }
 }
 
 p {
