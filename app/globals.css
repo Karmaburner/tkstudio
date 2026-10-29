@@ -50,6 +50,9 @@ body {
     font-stretch: 62%;
     line-height: 0.92;
     text-transform: uppercase;
+    /* Tette bokstaver gir store titler et plakatpreg. Små titler strammes mindre,
+       ellers flyter bokstavene sammen: 0 ved 32 px, -0,045em fra rundt 75 px. */
+    letter-spacing: clamp(-0.045em, calc((32px - 1em) * 0.08), 0px);
     /* Smal skrift har trangt mellomrom, så ordene flyter sammen uten litt ekstra luft. */
     word-spacing: 0.1em;
     text-wrap: balance;
@@ -74,6 +77,7 @@ p {
   font-weight: 900;
   font-stretch: 62%;
   text-transform: uppercase;
+  letter-spacing: clamp(-0.045em, calc((32px - 1em) * 0.08), 0px);
   word-spacing: 0.1em;
 }
 
