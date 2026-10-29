@@ -24,7 +24,7 @@ export function Knapp({
       className={`kutt-hjorne inline-flex min-h-12 items-center gap-3 px-6 py-3 font-bold transition-colors ${stil} ${className}`}
     >
       {children}
-      <span aria-hidden="true">→</span>
+      <span aria-hidden="true" className="inline-block -translate-y-px leading-none">→</span>
     </Link>
   );
 }
