@@ -1,30 +1,40 @@
 import Link from "next/link";
 import type { Bilde } from "@/lib/salong";
 
-// Hovedknappen: rød med ett avskåret hjørne. Hvit tekst på rod er 5,5:1.
+// Teksten i en knapp, som ruller opp ved hover mens pila flyr ut og tilbake.
+// Kopien er skjult for skjermlesere, så de hører teksten én gang.
+export function RullTekst({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <span className="rull-tekst">
+        <span>{children}</span>
+        <span aria-hidden="true">{children}</span>
+      </span>
+      <span aria-hidden="true" className="rull-pil">
+        <span>→</span>
+        <span>→</span>
+      </span>
+    </>
+  );
+}
+
+// Hovedknappen er hvit, den andre har hvit kant. Begge har rette hjørner.
 export function Knapp({
   href,
   children,
-  variant = "rod",
+  variant = "hvit",
   className = "",
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: "rod" | "lys" | "omriss";
+  variant?: "hvit" | "omriss";
   className?: string;
 }) {
-  const stil = {
-    rod: "bg-rod text-hvit hover:bg-hvit hover:text-kull",
-    lys: "bg-hvit text-kull hover:bg-lavendel",
-    omriss: "border-2 border-hvit text-hvit hover:bg-hvit hover:text-kull",
-  }[variant];
+  // Hele klassenavnene står skrevet ut, ellers finner ikke Tailwind dem.
+  const stil = { hvit: "knapp-hvit", omriss: "knapp-omriss" }[variant];
   return (
-    <Link
-      href={href}
-      className={`kutt-hjorne inline-flex min-h-12 items-center gap-3 px-6 py-3 font-bold transition-colors ${stil} ${className}`}
-    >
-      {children}
-      <span aria-hidden="true" className="inline-block -translate-y-px leading-none">→</span>
+    <Link href={href} className={`knapp ${stil} ${className}`}>
+      <RullTekst>{children}</RullTekst>
     </Link>
   );
 }

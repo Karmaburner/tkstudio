@@ -2,6 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 import { alleBehandlinger, apningstider, kategorier, minutter, team, tillegg } from "@/lib/salong";
+import { RullTekst } from "@/components/Felles";
 
 const kroner = (pris: string) => parseInt(pris.replace(/\D/g, ""));
 const trengerToning = ["Striper", "Balayage", "Bleking"];
@@ -258,7 +259,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                       setDagId(d.id);
                       setTid("");
                     }}
-                    className={`kutt-hjorne min-h-14 px-4 py-2 text-left ${
+                    className={`min-h-14 px-4 py-2 text-left ${
                       dag?.id === d.id ? "border-2 border-hvit bg-hvit text-kull" : "border-2 border-gra hover:border-neon"
                     }`}
                   >
@@ -381,9 +382,9 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
           </dl>
           <button
             type="submit"
-            className="kutt-hjorne mt-6 flex min-h-12 w-full items-center justify-center gap-3 bg-rod px-6 py-3 font-bold text-hvit transition-colors hover:bg-hvit hover:text-kull"
+            className="knapp knapp-hvit mt-6 w-full"
           >
-            Bestill time <span aria-hidden="true" className="inline-block -translate-y-px leading-none">→</span>
+            <RullTekst>Bestill time</RullTekst>
           </button>
           <p className="mt-4 text-[0.9375rem] text-gra">Demo. Ingenting blir sendt.</p>
         </div>

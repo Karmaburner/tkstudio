@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { alleBehandlinger, behandlingFor, filtre, frisyreSlug, frisyrer, type FrisyreType } from "@/lib/salong";
-import { Foto } from "./Felles";
+import { Foto, RullTekst } from "./Felles";
 
 // Hele galleriet med filter. Annenhver kolonne er skjøvet ned, så rutenettet blir skjevt.
 // Et klikk på et bilde åpner det stort i en <dialog>, som gir fokusfelle og Esc uten ekstra kode.
@@ -41,7 +41,7 @@ export function Galleri({ start }: { start?: string }) {
               type="button"
               aria-pressed={aktiv}
               onClick={() => setValgt(f.verdi)}
-              className={`kutt-hjorne min-h-12 px-5 font-bold transition-colors ${
+              className={`min-h-12 px-5 font-bold transition-colors ${
                 aktiv ? "bg-hvit text-kull" : "border-2 border-gra text-hvit hover:border-neon"
               }`}
             >
@@ -151,9 +151,9 @@ export function Galleri({ start }: { start?: string }) {
                 {behandling && (
                   <Link
                     href={`/bestill-time?behandling=${encodeURIComponent(behandling.navn)}`}
-                    className="kutt-hjorne flex min-h-12 items-center justify-center gap-3 bg-rod px-6 py-3 font-bold text-hvit transition-colors hover:bg-hvit hover:text-kull"
+                    className="knapp knapp-hvit"
                   >
-                    Bestill noe lignende <span aria-hidden="true" className="inline-block -translate-y-px leading-none">→</span>
+                    <RullTekst>Bestill noe lignende</RullTekst>
                   </Link>
                 )}
                 <div className="grid grid-cols-2 gap-3">

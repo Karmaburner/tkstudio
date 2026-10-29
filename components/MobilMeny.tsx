@@ -43,7 +43,7 @@ export function MobilMeny() {
             ))}
           </ul>
         </nav>
-        <Knapp href="/bestill-time" variant="lys" className="mt-3 w-full justify-center">
+        <Knapp href="/bestill-time" className="mt-3 w-full justify-center">
           Bestill time
         </Knapp>
       </div>

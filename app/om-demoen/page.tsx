@@ -85,7 +85,7 @@ export default function OmDemoen() {
             Lilit Labs er en liten nettsidebedrift i Hønefoss. Vi starter alltid med en prat om salongen og kundene deres.
           </p>
           <div className="mt-8">
-            <Knapp href="https://lilitlabs.com" variant="lys">
+            <Knapp href="https://lilitlabs.com">
               Ta kontakt med Lilit Labs
             </Knapp>
           </div>

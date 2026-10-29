@@ -175,7 +175,7 @@ export default function Forside() {
                     </li>
                   ))}
                 </ul>
-                <Knapp href={`/bestill-time?frisor=${p.slug}`} variant="lys" className="mt-6">
+                <Knapp href={`/bestill-time?frisor=${p.slug}`} className="mt-6">
                   Bestill hos {p.navn}
                 </Knapp>
               </li>
@@ -226,7 +226,7 @@ export default function Forside() {
               noe nytt?
             </h2>
             <div className="mt-10 flex flex-wrap items-center gap-6">
-              <Knapp href="/bestill-time" variant="lys">
+              <Knapp href="/bestill-time">
                 Bestill time
               </Knapp>
               <p className="text-[1.1875rem]">
