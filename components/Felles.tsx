@@ -11,10 +11,20 @@ export function RullTekst({ children }: { children: React.ReactNode }) {
         <span aria-hidden="true">{children}</span>
       </span>
       <span aria-hidden="true" className="rull-pil">
-        <span>→</span>
-        <span>→</span>
+        <Pil />
+        <Pil />
       </span>
     </>
+  );
+}
+
+// Pila er tegnet, ikke et tegn i skriften. Et tegn avrundes til hele piksler for seg selv,
+// og kunne havne 1 px lavere i noen knapper enn andre.
+function Pil() {
+  return (
+    <svg viewBox="0 0 20 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" className="h-[0.6em] w-[1em]">
+      <path d="M1 6h16M12 1.5 16.5 6 12 10.5" />
+    </svg>
   );
 }
 
