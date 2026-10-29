@@ -458,12 +458,19 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
               <dd className="tall text-[2rem] leading-none">{prisTekst}</dd>
             </div>
           </dl>
-          {/* Knappen er alltid aktiv, og teksten sier hva et klikk gjør. Mangler noe, viser klikket hvor. */}
+          {/* Knappen er alltid aktiv, og teksten sier hva et klikk gjør. Mangler noe, viser klikket hvor.
+              En dag er alltid valgt (den første ledige), så det som mangler er tidspunktet. */}
           <button
             type="submit"
             className="knapp knapp-hvit mt-6 w-full"
           >
-            <RullTekst>{!valgte.length ? "Velg behandling" : !tid ? "Velg dag og tid" : "Bekreft bestilling"}</RullTekst>
+            <RullTekst>{!valgte.length
+                ? "Velg behandling"
+                : tid
+                  ? "Bekreft bestilling"
+                  : dag?.tider.length === 0
+                    ? "Velg en annen dag"
+                    : "Velg tidspunkt"}</RullTekst>
           </button>
           <p className="mt-4 text-[0.9375rem] text-gra">Demo. Ingenting blir sendt.</p>
         </div>
