@@ -64,8 +64,15 @@ function Steg({ nr, tittel, children }: { nr: string; tittel: string; children: 
 }
 
 export function Bestilling({ start = {} }: { start?: { behandling?: string; frisor?: string } }) {
-  const [behandling, setBehandling] = useState(
-    alleBehandlinger.some((b) => b.navn === start.behandling) ? start.behandling! : "",
+  // Én behandling per kategori, så man kan ta klipp og striper i samme time,
+  // men ikke to klipp. Nøkkelen er kategorien, verdien er navnet på behandlingen.
+  const [valg, setValg] = useState<Record<string, string>>(() => {
+    const b = alleBehandlinger.find((x) => x.navn === start.behandling);
+    return b ? { [b.kategori.slug]: b.navn } : {};
+  });
+  // Fanen som er åpen: kategorien til behandlingen fra lenken, ellers den første.
+  const [fane, setFane] = useState(
+    kategorier.find((k) => k.behandlinger.some((b) => b.navn === start.behandling))?.slug ?? kategorier[0].slug,
   );
   const [frisor, setFrisor] = useState(team.some((p) => p.slug === start.frisor) ? start.frisor! : "forste");
   const [dagId, setDagId] = useState("");
@@ -81,19 +88,28 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
     () => true,
     () => false,
   );
-  const valgtBehandling = alleBehandlinger.find((b) => b.navn === behandling);
-  const valgteTillegg = tillegg.filter((t) => ekstra.includes(t.navn));
-  const varighet = (valgtBehandling ? minutter(valgtBehandling.tid) : 30) + valgteTillegg.reduce((sum, t) => sum + minutter(t.tid), 0);
-  const sum = valgtBehandling ? kroner(valgtBehandling.pris) + valgteTillegg.reduce((s, t) => s + kroner(t.pris), 0) : 0;
+  // I samme rekkefølge som fanene: klipp før farge.
+  const valgte = alleBehandlinger.filter((b) => valg[b.kategori.slug] === b.navn);
+  const valgtBehandling = valgte[0];
+  const behandling = valgte.map((b) => b.navn).join(" og ");
+  const betalt = valgte.some((b) => b.pris !== "0");
+  // Tillegg vises ikke ved gratis konsultasjon, og teller da heller ikke med.
+  const valgteTillegg = betalt ? tillegg.filter((t) => ekstra.includes(t.navn)) : [];
+  const varighet =
+    (valgte.length ? valgte.reduce((s, b) => s + minutter(b.tid), 0) : 30) + valgteTillegg.reduce((s, t) => s + minutter(t.tid), 0);
+  const sum = [...valgte, ...valgteTillegg].reduce((s, b) => s + kroner(b.pris), 0);
   const prisTekst = !valgtBehandling
     ? "–"
     : sum === 0
       ? "Gratis"
-      : `${valgtBehandling.pris.startsWith("fra") ? "fra " : ""}${sum.toLocaleString("nb-NO")} kr`;
+      : `${valgte.some((b) => b.pris.startsWith("fra")) ? "fra " : ""}${sum.toLocaleString("nb-NO")} kr`;
   const timer = Math.floor(varighet / 60);
   const varighetTekst = [timer ? `${timer} t` : "", varighet % 60 ? `${varighet % 60} min` : ""].filter(Boolean).join(" ");
-  const behandlingTekst = [behandling, ...ekstra].filter(Boolean).join(" + ");
-  const anbefalt = valgtBehandling?.kategori.frisor;
+  const behandlingTekst = [...valgte, ...valgteTillegg].map((b) => b.navn).join(" + ");
+  // Anbefalt frisør er spesialisten på den lengste behandlingen, for eksempel farge foran klipp.
+  // Alle kan klippe, så man kan fortsatt velge hvem man vil.
+  const viktigst = [...valgte].sort((a, b) => minutter(b.tid) - minutter(a.tid))[0];
+  const anbefalt = viktigst?.kategori.frisor;
   const dager = klar ? lagDager(frisor, varighet) : [];
   const dag = dager.find((d) => d.id === dagId) ?? dager[0];
   // En valgt tid som ikke lenger går (ny behandling eller frisør) teller som ikke valgt.
@@ -105,7 +121,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const nye: Feil = {};
-    if (!behandling) nye.behandling = "Velg hva du vil ha gjort.";
+    if (!valgte.length) nye.behandling = "Velg hva du vil ha gjort.";
     if (!tid) nye.tid = "Velg en tid.";
     if (!String(data.get("navn") ?? "").trim()) nye.navn = "Skriv navnet ditt.";
     const tlf = String(data.get("telefon") ?? "").replace(/\s/g, "");
@@ -142,38 +158,72 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
               {feil.behandling}
             </p>
           )}
-          <div className="grid gap-8 md:grid-cols-2">
-            {kategorier.map((k) => (
-              <div key={k.slug}>
-                <p className="bred text-[0.875rem] text-lavendel">{k.tittel}</p>
-                <div className="mt-3 space-y-2">
-                  {k.behandlinger.map((b) => (
-                    <label key={b.navn} className={kort}>
-                      <span className="flex items-center gap-3">
-                        <input
-                          type="radio"
-                          name="behandling"
-                          value={b.navn}
-                          checked={behandling === b.navn}
-                          onChange={() => setBehandling(b.navn)}
-                          className="sr-only"
-                        />
-                        <span>
-                          <span className="block font-bold">{b.navn}</span>
-                          <span className="tall block text-[0.9375rem]">{b.tid}</span>
-                        </span>
-                      </span>
-                      <span className="tall whitespace-nowrap">{b.pris === "0" ? "Gratis" : `${b.pris} kr`}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            ))}
+          {/* Én kategori om gangen, så listen ikke blir for lang. */}
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {kategorier.map((k) => {
+              const aktiv = fane === k.slug;
+              const harValgt = Boolean(valg[k.slug]);
+              return (
+                <button
+                  key={k.slug}
+                  type="button"
+                  aria-pressed={aktiv}
+                  onClick={() => setFane(k.slug)}
+                  className={`flex min-h-12 items-center justify-center gap-2 px-4 font-bold transition-colors ${
+                    aktiv ? "bg-hvit text-kull" : "border-2 border-gra text-hvit hover:border-neon"
+                  }`}
+                >
+                  {k.tittel}
+                  {harValgt && !aktiv && (
+                    <span className="text-lavendel">
+                      <span aria-hidden="true">✓</span>
+                      <span className="sr-only"> (valgt)</span>
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <p className="mt-4 text-gra">Velg én ting fra hver fane, for eksempel klipp og striper.</p>
+          <div className="mt-3 space-y-2">
+            {kategorier
+              .find((k) => k.slug === fane)!
+              .behandlinger.map((b) => (
+                <label key={b.navn} className={kort}>
+                  <span className="flex items-center gap-3">
+                    {/* Avkrysning, så valget kan tas bort igjen. Et nytt valg i samme fane bytter ut det gamle. */}
+                    <input
+                      type="checkbox"
+                      name="behandling"
+                      value={b.navn}
+                      checked={valg[fane] === b.navn}
+                      onChange={(e) =>
+                        setValg((v) => {
+                          const ny = { ...v };
+                          if (e.target.checked) ny[fane] = b.navn;
+                          else delete ny[fane];
+                          return ny;
+                        })
+                      }
+                      className="sr-only"
+                    />
+                    <span aria-hidden="true" className="tall w-4 text-center">
+                      {valg[fane] === b.navn ? "✓" : "+"}
+                    </span>
+                    <span>
+                      <span className="block font-bold">{b.navn}</span>
+                      <span className="tall block text-[0.9375rem]">{b.tid}</span>
+                    </span>
+                  </span>
+                  <span className="tall whitespace-nowrap">{b.pris === "0" ? "Gratis" : `${b.pris} kr`}</span>
+                </label>
+              ))}
           </div>
 
+          {betalt && (
           <div className="mt-10">
             <p className="bred text-[0.875rem] text-lavendel">Legg til</p>
-            <p className="mt-2 text-gra">Kan bare bestilles sammen med en behandling over.</p>
+            <p className="mt-2 text-gra">Valgfritt. Legges til {behandling.toLowerCase()}.</p>
             <div className="mt-3 grid gap-2 md:grid-cols-2">
               {tillegg.map((t) => (
                 <label key={t.navn} className={kort}>
@@ -194,7 +244,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                     <span>
                       <span className="block font-bold">
                         {t.navn}
-                        {t.navn === "Toning" && trengerToning.includes(behandling) && (
+                        {t.navn === "Toning" && valgte.some((b) => trengerToning.includes(b.navn)) && (
                           <span className="kutt-hjorne ml-2 bg-lavendel px-2 py-0.5 text-[0.875rem] text-kull">Anbefalt</span>
                         )}
                       </span>
@@ -206,6 +256,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
               ))}
             </div>
           </div>
+          )}
         </Steg>
 
         <Steg nr="02" tittel="Hvem vil du ha?">
@@ -229,7 +280,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                 </span>
                 {anbefalt === p.slug && (
                   <span className="kutt-hjorne shrink-0 bg-lavendel px-2 py-1 text-[0.875rem] font-bold text-kull">
-                    Anbefalt for {behandling.toLowerCase()}
+                    Anbefalt for {viktigst?.navn.toLowerCase()}
                   </span>
                 )}
               </label>
@@ -270,7 +321,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
               </div>
               {dag?.tider.length === 0 && (
                 <p className="mt-6 text-gra">
-                  Ingen ledige tider som rekker {valgtBehandling?.navn.toLowerCase()} før stengetid denne dagen. Prøv en annen dag.
+                  Ingen ledige tider som rekker {behandling.toLowerCase()} før stengetid denne dagen. Prøv en annen dag.
                 </p>
               )}
               <div className="mt-6 grid grid-cols-3 gap-2 sm:grid-cols-6">
