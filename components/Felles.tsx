@@ -87,3 +87,21 @@ export function SideTopp({
     </div>
   );
 }
+
+// Små symboler ved telefon og e-post. Pynt for øyet, så skjermlesere hopper over dem.
+export function TelefonIkon({ className = "" }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={`h-[1em] w-[1em] shrink-0 ${className}`}>
+      <path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z" />
+    </svg>
+  );
+}
+
+export function EpostIkon({ className = "" }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" className={`h-[1em] w-[1em] shrink-0 ${className}`}>
+      <rect x="3" y="5" width="18" height="14" rx="1.5" />
+      <path d="m3.5 6 8.5 7 8.5-7" />
+    </svg>
+  );
+}

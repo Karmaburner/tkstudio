@@ -3,6 +3,7 @@ import { salong } from "@/lib/salong";
 import { meny } from "@/lib/meny";
 import { Monogram } from "./Logo";
 import { Apningstider } from "./Apningstider";
+import { EpostIkon, TelefonIkon } from "./Felles";
 
 export function Footer() {
   return (
@@ -16,11 +17,13 @@ export function Footer() {
           <address className="mt-6 not-italic leading-relaxed">
             {salong.gate}, <span className="tall">{salong.postnr}</span> {salong.sted}
             <br />
-            <a href={`tel:${salong.telefonLenke}`} className="lenke tall inline-block py-1">
+            <a href={`tel:${salong.telefonLenke}`} className="lenke tall inline-flex items-center gap-2 py-1">
+              <TelefonIkon className="text-lavendel" />
               {salong.telefon}
             </a>
             <br />
-            <a href={`mailto:${salong.epost}`} className="lenke inline-block py-1">
+            <a href={`mailto:${salong.epost}`} className="lenke inline-flex items-center gap-2 py-1">
+              <EpostIkon className="text-lavendel" />
               {salong.epost}
             </a>
           </address>

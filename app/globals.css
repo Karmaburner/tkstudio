@@ -324,3 +324,60 @@ html:has(dialog[open]) {
     opacity: 0;
   }
 }
+
+/* Kartet i «Finn oss»: gatene tegnes opp én gang, så ledelinjene, så prikken. */
+.kart[data-tegn] .kart-strek {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.kart[data-tegn] .kart-elv,
+.kart[data-tegn] .kart-her,
+.kart[data-tegn] .kart-prikk {
+  opacity: 0;
+}
+.kart[data-tegn="spill"] .kart-strek {
+  animation: kart-tegn 1.8s cubic-bezier(0.6, 0, 0.2, 1) forwards;
+}
+.kart[data-tegn="spill"] .kart-sen {
+  animation-delay: 0.6s;
+}
+.kart[data-tegn="spill"] .kart-sist {
+  animation-delay: 1.8s;
+  animation-duration: 1s;
+}
+.kart[data-tegn="spill"] .kart-elv {
+  animation: kart-inn 1.2s ease-out forwards;
+}
+.kart[data-tegn="spill"] .kart-prikk {
+  animation: kart-inn 0.3s ease-out 1.8s forwards;
+}
+.kart[data-tegn="spill"] .kart-her {
+  animation: kart-inn 0.4s ease-out 2.6s forwards;
+}
+@keyframes kart-tegn {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes kart-inn {
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .kart-puls {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: kart-puls 2.4s ease-out infinite;
+  }
+}
+@keyframes kart-puls {
+  from {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}

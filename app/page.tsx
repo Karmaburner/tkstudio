@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Apningstider } from "@/components/Apningstider";
-import { Etikett, Foto, Knapp } from "@/components/Felles";
+import { Kart } from "@/components/Kart";
+import { EpostIkon, Etikett, Foto, Knapp, TelefonIkon } from "@/components/Felles";
 import { bilder, frisyreSlug, frisyrer, kategorier, salong, team } from "@/lib/salong";
 
 const laveste = (k: (typeof kategorier)[number]) => k.behandlinger[0].pris.replace("fra ", "");
@@ -250,10 +251,12 @@ export default function Forside() {
           </p>
           <p className="mt-4 max-w-sm text-gra">{salong.adkomst}</p>
           <p className="mt-6 space-y-1">
-            <a href={`tel:${salong.telefonLenke}`} className="lenke tall block w-fit py-1 text-[1.5rem]">
+            <a href={`tel:${salong.telefonLenke}`} className="lenke tall flex w-fit items-center gap-3 py-1 text-[1.5rem]">
+              <TelefonIkon className="text-lavendel" />
               {salong.telefon}
             </a>
-            <a href={`mailto:${salong.epost}`} className="lenke block w-fit py-1">
+            <a href={`mailto:${salong.epost}`} className="lenke flex w-fit items-center gap-3 py-1">
+              <EpostIkon className="text-[1.5rem] text-lavendel" />
               {salong.epost}
             </a>
           </p>
@@ -265,6 +268,7 @@ export default function Forside() {
         <div className="kutt-venstre">
           <Foto bilde={bilder.inngang} className="aspect-[4/3] h-full w-full object-cover" />
         </div>
+        <Kart />
       </section>
     </>
   );
