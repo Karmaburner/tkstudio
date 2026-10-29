@@ -174,8 +174,8 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                   }`}
                 >
                   {k.tittel}
-                  {harValgt && !aktiv && (
-                    <span className="text-lavendel">
+                  {harValgt && (
+                    <span className={aktiv ? "" : "text-lavendel"}>
                       <span aria-hidden="true">✓</span>
                       <span className="sr-only"> (valgt)</span>
                     </span>
@@ -184,7 +184,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
               );
             })}
           </div>
-          <p className="mt-4 text-gra">Velg én ting fra hver fane, for eksempel klipp og striper.</p>
+          <p className="mt-4 text-gra">Du kan kombinere flere behandlinger, for eksempel klipp og striper.</p>
           <div className="mt-3 space-y-2">
             {kategorier
               .find((k) => k.slug === fane)!
@@ -402,7 +402,34 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
           <dl className="mt-4 space-y-3">
             <div>
               <dt className="text-gra">Behandling</dt>
-              <dd className="font-bold">{behandlingTekst || "Ikke valgt"}</dd>
+              {/* Hver behandling kan fjernes rett herfra. */}
+              <dd>
+                {behandlingTekst ? (
+                  <ul className="mt-1 space-y-1">
+                    {[
+                      ...valgte.map((b) => ({
+                        navn: b.navn,
+                        fjern: () =>
+                          setValg((v) => {
+                            const ny = { ...v };
+                            delete ny[b.kategori.slug];
+                            return ny;
+                          }),
+                      })),
+                      ...valgteTillegg.map((t) => ({ navn: t.navn, fjern: () => setEkstra((v) => v.filter((x) => x !== t.navn)) })),
+                    ].map((b) => (
+                      <li key={b.navn} className="flex items-center justify-between gap-3">
+                        <span className="font-bold">{b.navn}</span>
+                        <button type="button" onClick={b.fjern} className="lenke -mr-2 min-h-11 px-2 text-[0.9375rem]">
+                          Fjern<span className="sr-only"> {b.navn.toLowerCase()}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span className="font-bold">Ikke valgt</span>
+                )}
+              </dd>
             </div>
             {valgtBehandling && (
               <div>
@@ -431,9 +458,16 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
               <dd className="tall text-[2rem] leading-none">{prisTekst}</dd>
             </div>
           </dl>
+          {/* Knappen er alltid aktiv. I stedet står det hva som gjenstår, og et klikk viser feltet som mangler. */}
+          <p aria-live="polite" className="mt-6 text-[0.9375rem]">
+            <span className="text-gra">Neste: </span>
+            <span className="font-bold">
+              {!valgte.length ? "velg behandling" : !tid ? "velg dag og tid" : "skriv navn og telefon"}
+            </span>
+          </p>
           <button
             type="submit"
-            className="knapp knapp-hvit mt-6 w-full"
+            className="knapp knapp-hvit mt-3 w-full"
           >
             <RullTekst>Bestill time</RullTekst>
           </button>

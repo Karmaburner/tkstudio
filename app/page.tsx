@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { Apningstider } from "@/components/Apningstider";
 import { Kart } from "@/components/Kart";
+import { Stripe } from "@/components/Stripe";
 import { EpostIkon, Etikett, Foto, Knapp, TelefonIkon } from "@/components/Felles";
 import { bilder, frisyreSlug, frisyrer, kategorier, salong, team } from "@/lib/salong";
 
-const laveste = (k: (typeof kategorier)[number]) => k.behandlinger[0].pris.replace("fra ", "");
+// Den billigste behandlingen i kategorien, så «fra» stemmer med prislisten. Gratis konsultasjon teller ikke.
+const laveste = (k: (typeof kategorier)[number]) =>
+  Math.min(...k.behandlinger.map((b) => parseInt(b.pris.replace(/\D/g, ""))).filter((p) => p > 0)).toLocaleString("nb-NO");
 
 // Et utvalg til stripa på forsiden. Hele galleriet ligger på /frisyrer.
 const utvalg = ["Burgunderbølger", "Rød balayage", "Teksturert fade", "Fuksia bob", "Festfrisyre", "Platina pixie", "Rosa og lilla ombré", "Burgunder bob", "Kobberkrøller"]
@@ -63,8 +66,7 @@ export default function Forside() {
             </h2>
           </div>
           <p className="max-w-prose text-[1.1875rem] text-gra lg:pb-3">
-            Klipp, herre, farge og styling. Fra en enkel stuss til en helt ny farge, og alt innenfor de fire er noe vi kan
-            skikkelig. Prisene står åpent, og du får vite hva det koster før vi begynner.
+            Klipp, herre, farge og styling. Vi kan håndverket og sier hva det koster før vi begynner.
           </p>
         </div>
 
@@ -122,13 +124,7 @@ export default function Forside() {
           </Knapp>
         </div>
 
-        {/* Kan rulles sidelengs med mus, finger og tastatur (Tab hit, så piltaster). */}
-        <div
-          tabIndex={0}
-          role="region"
-          aria-label="Utvalg av frisyrer, kan rulles sidelengs"
-          className="mt-14 overflow-x-auto pb-6 [scrollbar-color:var(--color-neon)_transparent]"
-        >
+        <Stripe etikett="Utvalg av frisyrer, kan rulles sidelengs">
           <ul className="skyv flex w-max gap-4 px-4 sm:px-6">
             {utvalg.map((f, i) => (
               <li key={f.navn} className={`w-[15rem] shrink-0 sm:w-[18rem] ${i % 2 ? "mt-16" : ""}`}>
@@ -143,7 +139,7 @@ export default function Forside() {
               </li>
             ))}
           </ul>
-        </div>
+        </Stripe>
       </section>
 
       {/* ---------- Teamet ---------- */}

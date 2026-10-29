@@ -2,13 +2,13 @@ import Link from "next/link";
 import { salong } from "@/lib/salong";
 import { meny } from "@/lib/meny";
 import { Monogram } from "./Logo";
-import { Apningstider } from "./Apningstider";
+import { ApningstiderKort } from "./Apningstider";
 import { EpostIkon, TelefonIkon } from "./Felles";
 
 export function Footer() {
   return (
     <footer className="kutt-topp mt-28 bg-flate pt-[calc(3.5vw+3rem)]">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-14 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-20 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
           <Monogram className="h-16 w-auto text-hvit" />
           <p className="smal mt-6 text-[3rem] leading-none">
@@ -30,7 +30,7 @@ export function Footer() {
         </div>
         <div>
           <h2 className="text-[2rem]">Åpent</h2>
-          <Apningstider className="mt-4 max-w-xs" />
+          <ApningstiderKort className="mt-4 max-w-xs" />
         </div>
         <div>
           <h2 className="text-[2rem]">Sider</h2>
@@ -46,7 +46,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-linje">
-        <p className="mx-auto max-w-7xl px-4 py-5 text-base text-gra sm:px-6">
+        <p className="mx-auto max-w-7xl px-4 py-7 text-base text-gra sm:px-6">
           Demo. Salongen, personene, prisene og adressen er oppdiktet, og bildene er laget med KI.{" "}
           <Link href="/om-demoen" className="font-bold text-hvit underline underline-offset-4">
             Om demoen
