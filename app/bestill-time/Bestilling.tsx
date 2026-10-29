@@ -458,18 +458,12 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
               <dd className="tall text-[2rem] leading-none">{prisTekst}</dd>
             </div>
           </dl>
-          {/* Knappen er alltid aktiv. I stedet står det hva som gjenstår, og et klikk viser feltet som mangler. */}
-          <p aria-live="polite" className="mt-6 text-[0.9375rem]">
-            <span className="text-gra">Neste: </span>
-            <span className="font-bold">
-              {!valgte.length ? "velg behandling" : !tid ? "velg dag og tid" : "skriv navn og telefon"}
-            </span>
-          </p>
+          {/* Knappen er alltid aktiv, og teksten sier hva et klikk gjør. Mangler noe, viser klikket hvor. */}
           <button
             type="submit"
-            className="knapp knapp-hvit mt-3 w-full"
+            className="knapp knapp-hvit mt-6 w-full"
           >
-            <RullTekst>Bestill time</RullTekst>
+            <RullTekst>{!valgte.length ? "Velg behandling" : !tid ? "Velg dag og tid" : "Bekreft bestilling"}</RullTekst>
           </button>
           <p className="mt-4 text-[0.9375rem] text-gra">Demo. Ingenting blir sendt.</p>
         </div>
