@@ -383,7 +383,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
             type="submit"
             className="kutt-hjorne mt-6 flex min-h-12 w-full items-center justify-center gap-3 bg-rod px-6 py-3 font-bold text-hvit transition-colors hover:bg-hvit hover:text-kull"
           >
-            Bestill time <span aria-hidden="true">→</span>
+            Bestill time <span aria-hidden="true" className="inline-block -translate-y-px leading-none">→</span>
           </button>
           <p className="mt-4 text-[0.9375rem] text-gra">Demo. Ingenting blir sendt.</p>
         </div>

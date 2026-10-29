@@ -153,7 +153,7 @@ export function Galleri({ start }: { start?: string }) {
                     href={`/bestill-time?behandling=${encodeURIComponent(behandling.navn)}`}
                     className="kutt-hjorne flex min-h-12 items-center justify-center gap-3 bg-rod px-6 py-3 font-bold text-hvit transition-colors hover:bg-hvit hover:text-kull"
                   >
-                    Bestill noe lignende <span aria-hidden="true">→</span>
+                    Bestill noe lignende <span aria-hidden="true" className="inline-block -translate-y-px leading-none">→</span>
                   </Link>
                 )}
                 <div className="grid grid-cols-2 gap-3">
