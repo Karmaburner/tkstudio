@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Galleri } from "@/components/Galleri";
+import { GalleriFraLenke } from "@/components/GalleriFraLenke";
 import { Knapp, SideTopp } from "@/components/Felles";
 
 export const metadata: Metadata = {
@@ -16,7 +18,10 @@ export default function Frisyrer() {
         </p>
       </SideTopp>
       <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6">
-        <Galleri />
+        {/* Den statiske siden viser galleriet lukket. En frisyre fra lenken åpnes i nettleseren. */}
+        <Suspense fallback={<Galleri />}>
+          <GalleriFraLenke />
+        </Suspense>
         <div className="mt-28 flex flex-wrap items-center gap-6 border-t-2 border-hvit pt-10">
           <p className="smal text-[clamp(2.5rem,6vw,4rem)] leading-none">Fant du en?</p>
           <Knapp href="/bestill-time">Bestill time</Knapp>

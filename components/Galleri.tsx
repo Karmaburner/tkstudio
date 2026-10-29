@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { alleBehandlinger, behandlingFor, filtre, frisyrer, type FrisyreType } from "@/lib/salong";
+import { alleBehandlinger, behandlingFor, filtre, frisyreSlug, frisyrer, type FrisyreType } from "@/lib/salong";
 import { Foto } from "./Felles";
 
 // Hele galleriet med filter. Annenhver kolonne er skjøvet ned, så rutenettet blir skjevt.
 // Et klikk på et bilde åpner det stort i en <dialog>, som gir fokusfelle og Esc uten ekstra kode.
-export function Galleri() {
+// start: frisyren som skal åpnes med en gang, fra ?frisyre= i lenker fra forsiden.
+export function Galleri({ start }: { start?: string }) {
   const [valgt, setValgt] = useState<FrisyreType | "alle">("alle");
-  const [apen, setApen] = useState<number | null>(null);
+  const [apen, setApen] = useState<number | null>(() => {
+    const i = frisyrer.findIndex((f) => frisyreSlug(f) === start);
+    return i === -1 ? null : i;
+  });
   const dialog = useRef<HTMLDialogElement>(null);
   const sveip = useRef(0);
   const synlige = valgt === "alle" ? frisyrer : frisyrer.filter((f) => f.typer.includes(valgt));

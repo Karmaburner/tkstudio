@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Apningstider } from "@/components/Apningstider";
 import { Etikett, Foto, Knapp } from "@/components/Felles";
-import { bilder, frisyrer, kategorier, salong, team } from "@/lib/salong";
+import { bilder, frisyreSlug, frisyrer, kategorier, salong, team } from "@/lib/salong";
 
 const laveste = (k: (typeof kategorier)[number]) => k.behandlinger[0].pris.replace("fra ", "");
 
@@ -112,7 +112,7 @@ export default function Forside() {
           <div>
             <Etikett>Frisyrer</Etikett>
             <h2 id="frisyre-tittel" className="mt-4 text-[clamp(3rem,8vw,6rem)]">
-              <span className="tall">26</span> måter å <span className="text-lavendel">bli sett</span> på
+              <span className="tall">{frisyrer.length}</span> måter å <span className="text-lavendel">bli sett</span> på
             </h2>
           </div>
           <Knapp href="/frisyrer" variant="omriss">
@@ -130,12 +130,14 @@ export default function Forside() {
           <ul className="skyv flex w-max gap-4 px-4 sm:px-6">
             {utvalg.map((f, i) => (
               <li key={f.navn} className={`w-[15rem] shrink-0 sm:w-[18rem] ${i % 2 ? "mt-16" : ""}`}>
-                <figure className="group">
-                  <div className="overflow-hidden [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)]">
-                    <Foto bilde={f.bilde} sizes="18rem" className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
-                  </div>
-                  <figcaption className="smal mt-3 pl-3 text-[1.625rem] leading-none group-hover:text-neon-tekst">{f.navn}</figcaption>
-                </figure>
+                <Link href={`/frisyrer?frisyre=${frisyreSlug(f)}`} className="group block">
+                  <figure>
+                    <div className="overflow-hidden [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)]">
+                      <Foto bilde={f.bilde} sizes="18rem" className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
+                    </div>
+                    <figcaption className="smal mt-3 pl-3 text-[1.625rem] leading-none group-hover:text-neon-tekst">{f.navn}</figcaption>
+                  </figure>
+                </Link>
               </li>
             ))}
           </ul>

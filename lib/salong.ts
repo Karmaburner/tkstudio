@@ -227,6 +227,17 @@ export function minutter(tid: string) {
 
 export const alleBehandlinger = kategorier.flatMap((k) => k.behandlinger.map((b) => ({ ...b, kategori: k })));
 
+// Kort navn til lenker: «Burgunderbølger» blir «burgunderbolger».
+export const frisyreSlug = (f: Frisyre) =>
+  f.navn
+    .toLowerCase()
+    .replace(/æ/g, "ae")
+    .replace(/ø/g, "o")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
 // Hvilken behandling i prislisten som gir en frisyre fra galleriet.
 export function behandlingFor(f: Frisyre) {
   const n = f.navn.toLowerCase();
