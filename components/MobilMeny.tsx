@@ -36,7 +36,7 @@ export function MobilMeny() {
           <ul>
             {meny.map((m) => (
               <li key={m.href}>
-                <Link href={m.href} className="smal block px-3 py-2 text-[2rem] leading-none hover:text-neon-tekst">
+                <Link href={m.href} className="smal block px-3 py-2 text-[2rem] leading-none glod-hover">
                   {m.tekst}
                 </Link>
               </li>

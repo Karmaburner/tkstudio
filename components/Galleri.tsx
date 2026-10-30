@@ -70,7 +70,7 @@ export function Galleri({ start }: { start?: string }) {
                 />
               </span>
               <span className="mt-3 flex items-baseline justify-between gap-3">
-                <span className="smal text-[1.5rem] leading-none group-hover:text-neon-tekst">{f.navn}</span>
+                <span className="smal text-[1.5rem] leading-none glod-hover">{f.navn}</span>
                 <span aria-hidden="true" className="text-[1.25rem] text-lavendel">
                   +
                 </span>

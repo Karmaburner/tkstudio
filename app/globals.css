@@ -339,6 +339,18 @@ p {
     0 0 20px var(--color-neon),
     0 0 40px color-mix(in srgb, var(--color-neon) 55%, transparent);
 }
+/* Hover på store ord og bildetekster: ordet blir værende hvitt og får neonglød, som titlene. */
+.glod-hover {
+  transition: text-shadow 0.25s;
+}
+.group:is(:hover, :focus-visible) .glod-hover,
+a.glod-hover:is(:hover, :focus-visible) {
+  text-shadow:
+    0 0 1px #fff,
+    0 0 8px var(--color-neon-tekst),
+    0 0 20px var(--color-neon),
+    0 0 40px color-mix(in srgb, var(--color-neon) 55%, transparent);
+}
 .neontekst {
   text-shadow: 0 0 22px color-mix(in srgb, var(--color-neon) 35%, transparent);
 }

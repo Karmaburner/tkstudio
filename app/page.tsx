@@ -85,7 +85,7 @@ export default function Forside() {
                   0{i + 1}
                 </span>
                 <span>
-                  <span className="smal block text-[clamp(3.5rem,11vw,8.5rem)] leading-[0.85] transition-colors group-hover:text-neon">
+                  <span className="smal block text-[clamp(3.5rem,11vw,8.5rem)] leading-[0.85] glod-hover">
                     {k.tittel}
                   </span>
                   <span className="mt-3 block max-w-md text-gra">{k.ingress}</span>
@@ -135,7 +135,7 @@ export default function Forside() {
                     <div className="overflow-hidden [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)]">
                       <Foto bilde={f.bilde} sizes="18rem" className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
                     </div>
-                    <figcaption className="smal mt-3 pl-3 text-[1.625rem] leading-none group-hover:text-neon-tekst">{f.navn}</figcaption>
+                    <figcaption className="smal mt-3 pl-3 text-[1.625rem] leading-none glod-hover">{f.navn}</figcaption>
                   </figure>
                 </Link>
               </li>
