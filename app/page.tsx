@@ -85,10 +85,10 @@ export default function Forside() {
                   0{i + 1}
                 </span>
                 <span>
-                  <span className="smal block text-[clamp(3.5rem,11vw,8.5rem)] leading-[0.85] glod-hover">
+                  <span className="smal block text-[clamp(3.5rem,11vw,8.5rem)] normal-case leading-[0.95] glod-hover">
                     {k.tittel}
                   </span>
-                  <span className="mt-3 block max-w-md text-gra">{k.ingress}</span>
+                  <span className="mt-5 block max-w-md text-gra">{k.ingress}</span>
                 </span>
                 <span className="text-right">
                   <span className="block text-gra">fra</span>
