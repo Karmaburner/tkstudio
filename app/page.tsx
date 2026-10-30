@@ -38,9 +38,11 @@ export default function Forside() {
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col px-4 pb-24 pt-2 sm:px-6 lg:min-h-[calc(100svh-4.5rem)] lg:justify-center lg:py-24">
           <div className="hero-opp max-w-2xl">
             <Etikett>Frisøren i {salong.sted}</Etikett>
-            <h1 id="hero-tittel" className="mt-10 text-[clamp(4.5rem,15vw,11.5rem)]">
-              <span className="block text-[0.5em]">Hår med</span>{" "}
-              <span className="block text-lavendel">mening.</span>
+            {/* Bred skrift i vanlige bokstaver, litt på skrå som diagonalene i salongen.
+                Fargen kommer fra neonglød, som skiltet på veggen, ikke fra et farget ord. */}
+            <h1 id="hero-tittel" className="hero-h1 mt-10 text-[clamp(3.25rem,9vw,7.75rem)]">
+              <span className="block text-[0.55em]">Hår med</span>{" "}
+              <span className="neonror flimmer block">mening.</span>
             </h1>
             <p className="mt-6 max-w-md text-[1.25rem] leading-relaxed lg:mt-8">
               Klipp, sterke farger og styling for deg som vil bli lagt merke til. Eller som bare vil ha en klipp som sitter.

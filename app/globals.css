@@ -294,6 +294,29 @@ p {
 .neonglod {
   box-shadow: 0 0 14px color-mix(in srgb, var(--color-neon) 45%, transparent);
 }
+/* Forsidetittelen: bred og rett, ikke smal plakat. */
+.hero-h1 {
+  font-stretch: 125%;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  transform: rotate(-4deg);
+  transform-origin: left bottom;
+}
+.hero-h1 span {
+  letter-spacing: -0.02em;
+}
+/* Neonrør: hvit kjerne med rosa og rød glød rundt. Hvit tekst på mørk bunn, så kontrasten holder. */
+.neonror {
+  color: #fff4f6;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 10px var(--color-neon-tekst),
+    0 0 24px var(--color-neon),
+    0 0 48px var(--color-neon),
+    0 0 90px color-mix(in srgb, var(--color-neon) 60%, transparent);
+}
 .neontekst {
   text-shadow: 0 0 22px color-mix(in srgb, var(--color-neon) 35%, transparent);
 }
