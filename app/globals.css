@@ -19,7 +19,7 @@
 /* Fargeroller (kontrast sjekket med kontrast.py):
    kull: bunn. flate: kort og paneler. hvit: tekst. gra: dempet tekst (9,4:1).
    Knapper er hvite med mørk tekst (17,2:1), siden hvit flate ikke brukes andre steder.
-   neon: linjer, pynt og hover. Uthevede ord i titler er lavendel, og feilmeldinger er hvite med lavendel merke (se Brain: rødt i UI).
+   neon: linjer, pynt og hover. Uthevede ord i titler er hvite med neonglød (.neonord), og feilmeldinger er hvite med lavendel merke (se Brain: rødt i UI).
    Aldri liten tekst (4,46:1).
    neon-tekst: liten rød tekst på mørk bunn (5,8:1).
    rod: båndet «Klar for noe nytt?» med hvit tekst (5,5:1). fuksia: flater med hvit tekst (8,2:1).
@@ -56,6 +56,19 @@ body {
     /* Smal skrift har trangt mellomrom, så ordene flyter sammen uten litt ekstra luft. */
     word-spacing: 0.1em;
     text-wrap: balance;
+  }
+  /* Sidetitler og seksjonstitler: bred skrift i vanlige bokstaver, som på forsiden.
+     De smale, tunge ordene (som KLIPP i trappen og h3) står igjen som kontrast. */
+  main :is(h1, h2),
+  main :is(h1, h2) span {
+    font-stretch: 125%;
+    font-weight: 800;
+    text-transform: none;
+    letter-spacing: -0.02em;
+  }
+  main :is(h1, h2) {
+    line-height: 1;
+    overflow-wrap: break-word;
   }
   /* Deler av en tittel i en annen størrelse regner avstanden ut fra sin egen størrelse. */
   :is(h1, h2, h3) span {
@@ -316,6 +329,15 @@ p {
     0 0 24px var(--color-neon),
     0 0 48px var(--color-neon),
     0 0 90px color-mix(in srgb, var(--color-neon) 60%, transparent);
+}
+/* Uthevede ord i titler: samme neonrør som forsiden, men svakere, så det ikke blir for mye. */
+.neonord {
+  color: #fff4f6;
+  text-shadow:
+    0 0 1px #fff,
+    0 0 8px var(--color-neon-tekst),
+    0 0 20px var(--color-neon),
+    0 0 40px color-mix(in srgb, var(--color-neon) 55%, transparent);
 }
 .neontekst {
   text-shadow: 0 0 22px color-mix(in srgb, var(--color-neon) 35%, transparent);

@@ -63,8 +63,8 @@ export default function Forside() {
         <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-end">
           <div>
             <Etikett>Det vi gjør</Etikett>
-            <h2 id="gjor-tittel" className="mt-4 text-[clamp(3rem,8vw,6rem)]">
-              Fire ting. <span className="text-lavendel">Gjort skikkelig.</span>
+            <h2 id="gjor-tittel" className="mt-4 text-[clamp(2.25rem,5vw,3.75rem)]">
+              Fire ting. <span className="neonord">Gjort skikkelig.</span>
             </h2>
           </div>
           <p className="max-w-prose text-[1.1875rem] text-gra lg:pb-3">
@@ -117,8 +117,8 @@ export default function Forside() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-4 sm:px-6">
           <div>
             <Etikett>Frisyrer</Etikett>
-            <h2 id="frisyre-tittel" className="mt-4 text-[clamp(3rem,8vw,6rem)]">
-              <span className="tall">{frisyrer.length}</span> måter å <span className="text-lavendel">bli sett</span> på
+            <h2 id="frisyre-tittel" className="mt-4 text-[clamp(2.25rem,5vw,3.75rem)]">
+              <span className="tall">{frisyrer.length}</span> måter å <span className="neonord">bli sett</span> på
             </h2>
           </div>
           <Knapp href="/frisyrer" variant="omriss">
@@ -148,8 +148,8 @@ export default function Forside() {
       <section id="teamet" aria-labelledby="team-tittel" className="kutt-begge mt-20 scroll-mt-8 lg:mt-32 bg-fuksia py-[calc(3.5vw+5rem)]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Etikett farge="text-hvit">Teamet</Etikett>
-          <h2 id="team-tittel" className="mt-4 max-w-5xl text-[clamp(3rem,9vw,7rem)]">
-            T for Tiril. K for Kasper. <span className="text-lavendel">Ronja for resten.</span>
+          <h2 id="team-tittel" className="mt-4 max-w-5xl text-[clamp(2.25rem,5.5vw,4.25rem)]">
+            T for Tiril. K for Kasper. <span className="neonord">Ronja for resten.</span>
           </h2>
           <p className="mt-6 max-w-prose text-[1.1875rem]">
             TK Studio er to frisører som ville ha sin egen salong, og en tredje som de ikke klarte seg uten. Du velger selv hvem du
@@ -187,8 +187,8 @@ export default function Forside() {
         <div className="grid gap-4 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-5 md:pt-10">
             <Etikett>Salongen</Etikett>
-            <h2 id="salong-tittel" className="mt-4 text-[clamp(3rem,7vw,5.5rem)]">
-              Svart, rødt og <span className="text-lavendel">litt for mye</span> neon
+            <h2 id="salong-tittel" className="mt-4 text-[clamp(2.25rem,4.25vw,3.5rem)]">
+              Svart, rødt og <span className="neonord">litt for mye</span> neon
             </h2>
             <p className="mt-6 max-w-prose text-[1.1875rem] text-gra">
               Seks stoler, to vasker og en sofa du ikke vil reise deg fra. Kaffen er god, musikken er høy nok, og ingen spør om du
@@ -219,7 +219,7 @@ export default function Forside() {
             className="absolute inset-0 h-full w-full object-cover opacity-15 grayscale"
           />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
-            <h2 id="cta-tittel" className="text-[clamp(3.5rem,12vw,10rem)]">
+            <h2 id="cta-tittel" className="text-[clamp(2.25rem,7.5vw,6.25rem)]">
               Klar for <br className="sm:hidden" />
               noe nytt?
             </h2>
@@ -242,7 +242,7 @@ export default function Forside() {
       <section id="finn-oss" aria-labelledby="finn-tittel" className="mx-auto mt-20 grid max-w-7xl scroll-mt-8 lg:mt-32 gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr_1.2fr]">
         <div>
           <Etikett>Finn oss</Etikett>
-          <h2 id="finn-tittel" className="mt-4 text-[clamp(3rem,6vw,4.5rem)]">
+          <h2 id="finn-tittel" className="mt-4 text-[clamp(2.25rem,3.75vw,2.75rem)]">
             {salong.gate}
           </h2>
           <p className="mt-4 text-[1.1875rem]">

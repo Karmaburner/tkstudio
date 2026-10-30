@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function BestillTime() {
   return (
     <>
-      <SideTopp etikett="Bestill time" tittel={<>Sett deg <span className="text-lavendel">i stolen</span></>}>
+      <SideTopp etikett="Bestill time" tittel={<>Sett deg <span className="neonord">i stolen</span></>}>
         <p>
           Fire valg og du er ferdig. Vil du heller snakke med noen, ring{" "}
           <a href={`tel:${salong.telefonLenke}`} className="lenke tall">

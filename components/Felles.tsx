@@ -101,7 +101,7 @@ export function SideTopp({
   return (
     <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-14 sm:px-6 sm:pt-20">
       <Etikett>{etikett}</Etikett>
-      <h1 className="mt-8 text-[clamp(3.5rem,13vw,10rem)]">{tittel}</h1>
+      <h1 className="mt-8 text-[clamp(2.25rem,8vw,6.25rem)]">{tittel}</h1>
       <div aria-hidden="true" className="hero-strek neonglod mt-6 h-[4px] w-[min(40rem,80%)] -skew-x-[40deg] bg-neon" />
       {children && <div className="mt-8 max-w-prose space-y-4 text-[1.1875rem] text-gra">{children}</div>}
     </div>

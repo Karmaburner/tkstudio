@@ -127,7 +127,7 @@ export function Galleri({ start }: { start?: string }) {
                 </button>
               </div>
 
-              <h2 id="lysboks-tittel" className="mt-6 text-[clamp(3rem,7vw,5rem)]">
+              <h2 id="lysboks-tittel" className="mt-6 text-[clamp(2.25rem,4.25vw,3rem)]">
                 {vist.navn}
               </h2>
               <p className="mt-3 max-w-prose text-[1.125rem] text-gra">{vist.bilde.alt}</p>

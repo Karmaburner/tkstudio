@@ -44,7 +44,7 @@ const punkter = [
 export default function OmDemoen() {
   return (
     <>
-      <SideTopp etikett="Om demoen" tittel={<>En salong som <span className="text-lavendel">ikke finnes</span></>}>
+      <SideTopp etikett="Om demoen" tittel={<>En salong som <span className="neonord">ikke finnes</span></>}>
         <p>
           TK Studio er laget av Lilit Labs for å vise hva en frisørsalong kan få: en side med like mye personlighet som salongen selv.
         </p>
@@ -57,7 +57,7 @@ export default function OmDemoen() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <section aria-labelledby="viser-tittel">
           <Etikett>Seks grep</Etikett>
-          <h2 id="viser-tittel" className="mt-4 text-[clamp(3rem,7vw,5rem)]">
+          <h2 id="viser-tittel" className="mt-4 text-[clamp(2.25rem,4.25vw,3rem)]">
             Dette viser siden
           </h2>
           <ol className="mt-12 grid gap-x-12 gap-y-14 md:grid-cols-2">
@@ -78,7 +78,7 @@ export default function OmDemoen() {
 
         <section aria-labelledby="lilit-tittel" className="kutt-hjorne mt-28 bg-fuksia px-6 py-14 sm:px-12">
           <Etikett farge="text-hvit">Lilit Labs</Etikett>
-          <h2 id="lilit-tittel" className="mt-4 max-w-3xl text-[clamp(2.75rem,6vw,4.5rem)]">
+          <h2 id="lilit-tittel" className="mt-4 max-w-3xl text-[clamp(2.25rem,3.75vw,2.75rem)]">
             Vil du ha noe lignende for din salong?
           </h2>
           <p className="mt-5 max-w-prose text-[1.1875rem]">
@@ -92,7 +92,7 @@ export default function OmDemoen() {
         </section>
 
         <section aria-labelledby="tekst-tittel" className="mt-24 max-w-prose">
-          <h2 id="tekst-tittel" className="text-[2.5rem]">
+          <h2 id="tekst-tittel" className="text-[2.25rem]">
             Større tekst
           </h2>
           <p className="mt-4 text-gra">

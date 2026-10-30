@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Priser() {
   return (
     <>
-      <SideTopp etikett="Priser" tittel={<>Ingen <span className="text-lavendel">overraskelser</span></>}>
+      <SideTopp etikett="Priser" tittel={<>Ingen <span className="neonord">overraskelser</span></>}>
         <p>
           Prisene gjelder vanlig lengde. Har du veldig langt eller tykt hår, sier vi fra før vi begynner. Står det «fra», får du en
           fast pris i stolen.
@@ -34,7 +34,7 @@ export default function Priser() {
                 <span aria-hidden="true" className="tall text-[1.5rem] text-lavendel">
                   0{i + 1}
                 </span>
-                <h2 id={`${k.slug}-tittel`} className="text-[clamp(4rem,12vw,9rem)]">
+                <h2 id={`${k.slug}-tittel`} className="text-[clamp(2.5rem,7.5vw,5.5rem)]">
                   {k.tittel}
                 </h2>
               </div>
@@ -69,7 +69,7 @@ export default function Priser() {
 
         {/* Tillegg uten bilde: en rolig liste, for den skal bare leses. */}
         <section id="tillegg" aria-labelledby="tillegg-tittel" className="scroll-mt-8 lg:ml-[33.333%] lg:pl-10">
-          <h2 id="tillegg-tittel" className="text-[clamp(3rem,8vw,5.5rem)]">
+          <h2 id="tillegg-tittel" className="text-[clamp(2.25rem,5vw,3.5rem)]">
             Tillegg
           </h2>
           <p className="mt-3 max-w-prose text-[1.1875rem] text-gra">Legges til en annen behandling. Kan ikke bestilles alene.</p>
