@@ -16,8 +16,10 @@ const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
   axes: ["wdth"],
-  // 90 KB. Forhåndslastet konkurrerte den med toppbildet på tregt mobilnett.
-  preload: false,
+  // Forhåndslastes: LCP er teksten «mening.» i Archivo. Uten forhåndslasting kom skriften
+  // av og til etter første tegning, og skriftbyttet gjorde LCP rundt 1 s senere
+  // (målt 2026-11-01, se Brain: ideer/tk-studio).
+  preload: true,
 });
 
 export const metadata: Metadata = {
