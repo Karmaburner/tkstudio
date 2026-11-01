@@ -11,8 +11,10 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-4 pb-20 sm:px-6 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
           <Monogram className="h-16 w-auto text-hvit" />
-          <p className="smal mt-6 text-[3rem] leading-none">
-            Hår med <span className="neonord">mening</span>
+          {/* Slagordet ser ut som i toppen: bred skrift, vanlige bokstaver og glød på «mening.». */}
+          <p className="slagord mt-6 text-[3rem]">
+            <span className="block text-[0.55em]">Hår med</span>
+            <span className="neonord block">mening.</span>
           </p>
           <address className="mt-6 not-italic leading-relaxed">
             {salong.gate}, <span className="tall">{salong.postnr}</span> {salong.sted}

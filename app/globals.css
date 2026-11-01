@@ -287,6 +287,14 @@ p {
 .hero-h1 span {
   letter-spacing: -0.02em;
 }
+/* Slagordet i bunnen: samme skrift som forsidetittelen, men rett og mindre. */
+.slagord {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
 /* Neonrør: hvit kjerne med rosa og rød glød rundt. Hvit tekst på mørk bunn, så kontrasten holder. */
 .neonror {
   color: #fff4f6;
