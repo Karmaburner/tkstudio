@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Bilde } from "@/lib/salong";
+import storrelser from "@/lib/bildestorrelser.json";
 
 // Hovedknappen er hvit, den andre har hvit kant. Begge har rette hjørner.
 // Ingen pil bak teksten: knappeteksten sier selv hva som skjer.
@@ -34,6 +35,17 @@ export function Etikett({ children, farge = "text-lavendel" }: { children: React
   );
 }
 
+// srcSet fra de mindre utgavene som scripts/lag-storrelser.mjs har laget.
+// Mangler bildet i lista, brukes srcSet fra bildet selv, om det har en.
+export function lagSrcSet(bilde: Bilde) {
+  const fil = bilde.src.split("/").pop() ?? "";
+  const info = (storrelser as Record<string, { w: number; utgaver: number[] }>)[fil];
+  if (!info?.utgaver.length) return bilde.srcSet;
+  const mappe = bilde.src.slice(0, -fil.length);
+  const navn = fil.replace(/\.webp$/, "");
+  return [...info.utgaver.map((w) => `${mappe}${navn}-w${w}.webp ${w}w`), `${bilde.src} ${info.w}w`].join(", ");
+}
+
 export function Foto({
   bilde,
   className = "",
@@ -50,7 +62,7 @@ export function Foto({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={bilde.src}
-      srcSet={bilde.srcSet}
+      srcSet={lagSrcSet(bilde)}
       alt={bilde.alt}
       width={bilde.w}
       height={bilde.h}

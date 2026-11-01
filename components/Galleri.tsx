@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { alleBehandlinger, behandlingFor, filtre, frisyreSlug, frisyrer, type FrisyreType } from "@/lib/salong";
-import { Foto } from "./Felles";
+import { Foto, lagSrcSet } from "./Felles";
 
 // Hele galleriet med filter. Annenhver kolonne er skjøvet ned, så rutenettet blir skjevt.
 // Et klikk på et bilde åpner det stort i en <dialog>, som gir fokusfelle og Esc uten ekstra kode.
@@ -104,7 +104,7 @@ export function Galleri({ start }: { start?: string }) {
               <img
                 key={vist.bilde.src}
                 src={vist.bilde.src}
-                srcSet={vist.bilde.srcSet}
+                srcSet={lagSrcSet(vist.bilde)}
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 alt={vist.bilde.alt}
                 width={vist.bilde.w}

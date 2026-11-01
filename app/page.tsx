@@ -95,7 +95,7 @@ export default function Forside() {
                   aria-hidden="true"
                   className="kutt-venstre pointer-events-none absolute right-48 top-1/2 hidden h-56 w-44 -translate-y-1/2 rotate-3 scale-90 overflow-hidden opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100 lg:block"
                 >
-                  <Foto bilde={{ ...k.bilde, alt: "" }} className="h-full w-full object-cover" />
+                  <Foto bilde={{ ...k.bilde, alt: "" }} sizes="11rem" className="h-full w-full object-cover" />
                 </span>
               </Link>
             </li>
@@ -128,7 +128,7 @@ export default function Forside() {
                 <Link href={`/frisyrer?frisyre=${frisyreSlug(f)}`} className="group block">
                   <figure>
                     <div className="overflow-hidden [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)]">
-                      <Foto bilde={f.bilde} sizes="18rem" className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
+                      <Foto bilde={f.bilde} sizes="(min-width: 640px) 18rem, 15rem" className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-105" />
                     </div>
                     <figcaption className="smal mt-3 pl-3 text-[1.625rem] leading-none glod-hover">{f.navn}</figcaption>
                   </figure>
@@ -154,7 +154,7 @@ export default function Forside() {
             {team.map((p, i) => (
               <li key={p.slug} className={["", "md:mt-28", "md:mt-12"][i]}>
                 <div className="relative overflow-hidden [clip-path:polygon(0_0,100%_0,100%_88%,82%_100%,0_100%)]">
-                  <Foto bilde={p.bilde} className="aspect-[3/4] w-full object-cover" />
+                  <Foto bilde={p.bilde} sizes="(min-width: 768px) 30vw, 100vw" className="aspect-[3/4] w-full object-cover" />
                   <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-kull/90 to-transparent" />
                   <h3 className="absolute bottom-4 left-4 text-[4.5rem] leading-none">{p.navn}</h3>
                 </div>
@@ -192,13 +192,13 @@ export default function Forside() {
             <Foto bilde={bilder.stasjoner} className="aspect-[16/10] w-full object-cover" sizes="(min-width: 768px) 58vw, 100vw" />
           </div>
           <div className="md:col-span-4 md:col-start-2 md:mt-8">
-            <Foto bilde={bilder.neon} className="aspect-square w-full object-cover" />
+            <Foto bilde={bilder.neon} sizes="(min-width: 768px) 33vw, 100vw" className="aspect-square w-full object-cover" />
           </div>
           <div className="md:col-span-3 md:mt-16">
-            <Foto bilde={bilder.produkter} className="aspect-[3/4] w-full object-cover" />
+            <Foto bilde={bilder.produkter} sizes="(min-width: 768px) 25vw, 100vw" className="aspect-[3/4] w-full object-cover" />
           </div>
           <div className="kutt-hoyre md:col-span-4 md:-mt-6">
-            <Foto bilde={bilder.ventesone} className="aspect-[4/5] w-full object-cover" />
+            <Foto bilde={bilder.ventesone} sizes="(min-width: 768px) 33vw, 100vw" className="aspect-[4/5] w-full object-cover" />
           </div>
         </div>
       </section>
@@ -208,6 +208,7 @@ export default function Forside() {
         <div className="kutt-begge relative isolate overflow-hidden bg-rod py-[calc(3.5vw+5rem)]">
           <Foto
             bilde={bilder.sakser}
+            sizes="100vw"
             className="absolute inset-0 h-full w-full object-cover opacity-15 grayscale"
           />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
@@ -256,7 +257,7 @@ export default function Forside() {
           <Apningstider className="mt-4 text-[1.125rem]" />
         </div>
         <div className="kutt-venstre">
-          <Foto bilde={bilder.inngang} className="aspect-[4/3] h-full w-full object-cover" />
+          <Foto bilde={bilder.inngang} sizes="(min-width: 1024px) 36vw, 100vw" className="aspect-[4/3] h-full w-full object-cover" />
         </div>
         <Kart />
       </section>

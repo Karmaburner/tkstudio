@@ -27,7 +27,7 @@ export default function Priser() {
             className="grid scroll-mt-8 gap-10 lg:grid-cols-12"
           >
             <div className={`lg:col-span-4 ${i % 2 ? "kutt-venstre lg:order-last" : "kutt-hoyre"}`}>
-              <Foto bilde={k.bilde} className="aspect-[3/4] w-full object-cover" />
+              <Foto bilde={k.bilde} sizes="(min-width: 1024px) 33vw, 100vw" className="aspect-[3/4] w-full object-cover" />
             </div>
             <div className="lg:col-span-8">
               <h2 id={`${k.slug}-tittel`} className="text-[clamp(2.5rem,7.5vw,5.5rem)]">

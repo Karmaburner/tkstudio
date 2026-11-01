@@ -73,3 +73,6 @@ await sharp(fs.readFileSync(path.join(kilde, "01_Salong/01_hero_salong_med_logo.
 await sharp(fs.readFileSync("app/icon.svg"), { density: 400 }).resize(180, 180).png().toFile("app/apple-icon.png");
 
 console.log(`${Object.keys(filer).length} bilder lagt i ${ut}`);
+
+// Mindre utgaver av alle bilder og lista Foto-komponenten bruker.
+await import("./lag-storrelser.mjs");
