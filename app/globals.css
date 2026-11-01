@@ -135,7 +135,7 @@ p {
 }
 
 /* Knapper: rette hjørner. Hovedknappen er hvit med mørk tekst (17,2:1), og hvit flate
-   finnes ingen andre steder, så den er det sterkeste på siden. Teksten ruller ved hover. */
+   finnes ingen andre steder, så den er det sterkeste på siden. Hover gir neonglød rundt knappen. */
 @utility knapp {
   display: inline-flex;
   align-items: center;
@@ -152,52 +152,19 @@ p {
 @utility knapp-hvit {
   background: var(--color-hvit);
   color: var(--color-kull);
+  transition: box-shadow 0.2s;
+  &:hover {
+    box-shadow:
+      0 0 0 2px var(--color-kull),
+      0 0 0 4px var(--color-neon-tekst),
+      0 0 22px color-mix(in srgb, var(--color-neon) 70%, transparent);
+  }
 }
 @utility knapp-omriss {
   color: var(--color-hvit);
   box-shadow: inset 0 0 0 2px var(--color-hvit);
   &:hover {
     background: rgb(247 243 246 / 0.12);
-  }
-}
-/* Teksten og pila ligger to ganger. Den ene ruller ut, den andre ruller inn. */
-.rull-tekst,
-.rull-pil {
-  display: inline-grid;
-  overflow: hidden;
-}
-.rull-pil {
-  align-items: center;
-}
-.rull-tekst {
-  line-height: 1.5;
-  height: 1.5em;
-}
-.rull-tekst > span,
-.rull-pil > svg {
-  grid-area: 1 / 1;
-  transition: transform 0.35s cubic-bezier(0.7, 0, 0.2, 1);
-}
-.rull-tekst > span + span {
-  transform: translateY(100%);
-}
-.rull-pil > svg + svg {
-  transform: translateX(-120%);
-}
-:is(a, button):hover > .rull-tekst > span:first-child {
-  transform: translateY(-100%);
-}
-:is(a, button):hover > .rull-pil > svg:first-child {
-  transform: translateX(120%);
-}
-:is(a, button):hover > .rull-tekst > span + span,
-:is(a, button):hover > .rull-pil > svg + svg {
-  transform: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .rull-tekst > span,
-  .rull-pil > svg {
-    transition: none;
   }
 }
 
@@ -369,41 +336,14 @@ a.glod-hover:is(:hover, :focus-visible) {
   .hero-opp {
     animation: flytt 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
+  /* Neonrøret blinker én gang når det tennes, så står det stille. */
   .flimmer {
-    animation: flimmer 6s linear infinite;
+    animation: flimmer 1.6s linear 0.5s 1;
   }
   .rotere {
     animation: rotere 18s linear infinite;
   }
 
-  /* Rullestyrt: innhold glir inn, og neonstreker tegnes når de kommer i bildet.
-     Nettlesere uten støtte viser alt som vanlig. */
-  @supports (animation-timeline: view()) {
-    .glid {
-      animation: opp linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-    .tegn {
-      transform-origin: left;
-      animation: strek linear both;
-      animation-timeline: view();
-      animation-range: entry 10% cover 40%;
-    }
-    .skyv {
-      animation: skyv linear both;
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
-    }
-  }
-}
-@keyframes skyv {
-  from {
-    transform: translateX(6%);
-  }
-  to {
-    transform: translateX(-6%);
-  }
 }
 
 details > summary {
@@ -500,7 +440,7 @@ html:has(dialog[open]) {
   .kart-puls {
     transform-box: fill-box;
     transform-origin: center;
-    animation: kart-puls 2.4s ease-out infinite;
+    animation: kart-puls 2.4s ease-out 2.6s 3;
   }
 }
 @keyframes kart-puls {

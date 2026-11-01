@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Frisyrer() {
   return (
     <>
-      <SideTopp etikett="Frisyrer" tittel={<>Finn din <span className="neonord">neste look.</span></>}>
+      <SideTopp tittel="Finn din neste look.">
         <p>
           Ta et skjermbilde av den du liker og vis det til oss. Vi sier ærlig hva som passer håret ditt og hva det vil koste.
         </p>

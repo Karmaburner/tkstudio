@@ -62,9 +62,8 @@ export default function Forside() {
       <section aria-labelledby="gjor-tittel" className="mx-auto mt-24 max-w-7xl px-4 sm:px-6 lg:mt-40">
         <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-end">
           <div>
-            <Etikett>Det vi gjør</Etikett>
-            <h2 id="gjor-tittel" className="mt-4 text-[clamp(2.25rem,5vw,3.75rem)]">
-              Fire ting. <span className="neonord">Gjort skikkelig.</span>
+            <h2 id="gjor-tittel" className="text-[clamp(2.25rem,5vw,3.75rem)]">
+              Fire ting. Gjort skikkelig.
             </h2>
           </div>
           <p className="max-w-prose text-[1.1875rem] text-gra lg:pb-3">
@@ -74,16 +73,13 @@ export default function Forside() {
 
         <ol className="mt-16 border-t-2 border-hvit">
           {kategorier.map((k, i) => (
-            <li key={k.slug} className="glid border-b-2 border-hvit">
+            <li key={k.slug} className="border-b-2 border-hvit">
               <Link
                 href={`/priser#${k.slug}`}
                 // Trappen: hvert trinn rykkes inn. Halvt så mye på mobil, så teksten får plass.
-                className="group relative grid items-center gap-x-8 gap-y-2 py-8 pl-[calc(var(--trinn)*3.5vw)] sm:grid-cols-[4rem_1fr_auto] sm:pl-[min(calc(var(--trinn)*7vw),calc(var(--trinn)*5rem))]"
+                className="group relative grid items-center gap-x-8 gap-y-2 py-8 pl-[calc(var(--trinn)*3.5vw)] sm:grid-cols-[1fr_auto] sm:pl-[min(calc(var(--trinn)*7vw),calc(var(--trinn)*5rem))]"
                 style={{ "--trinn": i } as React.CSSProperties}
               >
-                <span aria-hidden="true" className="tall text-[1.25rem] text-lavendel">
-                  0{i + 1}
-                </span>
                 <span>
                   <span className="smal block text-[clamp(3.5rem,11vw,8.5rem)] normal-case leading-[0.95] glod-hover">
                     {k.tittel}
@@ -116,9 +112,8 @@ export default function Forside() {
       <section aria-labelledby="frisyre-tittel" className="mt-24 lg:mt-40">
         <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-6 px-4 sm:px-6">
           <div>
-            <Etikett>Frisyrer</Etikett>
-            <h2 id="frisyre-tittel" className="mt-4 text-[clamp(2.25rem,5vw,3.75rem)]">
-              <span className="tall">{frisyrer.length}</span> måter å <span className="neonord">bli sett</span> på
+            <h2 id="frisyre-tittel" className="text-[clamp(2.25rem,5vw,3.75rem)]">
+              <span className="tall">{frisyrer.length}</span> måter å bli sett på
             </h2>
           </div>
           <Knapp href="/frisyrer" variant="omriss">
@@ -127,7 +122,7 @@ export default function Forside() {
         </div>
 
         <Stripe etikett="Utvalg av frisyrer, kan rulles sidelengs">
-          <ul className="skyv flex w-max gap-4 px-4 sm:px-6">
+          <ul className="flex w-max gap-4 px-4 sm:px-6">
             {utvalg.map((f, i) => (
               <li key={f.navn} className={`w-[15rem] shrink-0 sm:w-[18rem] ${i % 2 ? "mt-16" : ""}`}>
                 <Link href={`/frisyrer?frisyre=${frisyreSlug(f)}`} className="group block">
@@ -147,9 +142,8 @@ export default function Forside() {
       {/* ---------- Teamet ---------- */}
       <section id="teamet" aria-labelledby="team-tittel" className="kutt-begge mt-20 scroll-mt-8 lg:mt-32 bg-fuksia py-[calc(3.5vw+5rem)]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Etikett farge="text-hvit">Teamet</Etikett>
-          <h2 id="team-tittel" className="mt-4 max-w-5xl text-[clamp(2.25rem,5.5vw,4.25rem)]">
-            T for Tiril. K for Kasper. <span className="neonord">Ronja for resten.</span>
+          <h2 id="team-tittel" className="max-w-5xl text-[clamp(2.25rem,5.5vw,4.25rem)]">
+            T for Tiril. K for Kasper. Ronja for resten.
           </h2>
           <p className="mt-6 max-w-prose text-[1.1875rem]">
             TK Studio er to frisører som ville ha sin egen salong, og en tredje som de ikke klarte seg uten. Du velger selv hvem du
@@ -158,7 +152,7 @@ export default function Forside() {
 
           <ul className="mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
             {team.map((p, i) => (
-              <li key={p.slug} className={`glid ${["", "md:mt-28", "md:mt-12"][i]}`}>
+              <li key={p.slug} className={["", "md:mt-28", "md:mt-12"][i]}>
                 <div className="relative overflow-hidden [clip-path:polygon(0_0,100%_0,100%_88%,82%_100%,0_100%)]">
                   <Foto bilde={p.bilde} className="aspect-[3/4] w-full object-cover" />
                   <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-kull/90 to-transparent" />
@@ -186,9 +180,8 @@ export default function Forside() {
       <section id="salongen" aria-labelledby="salong-tittel" className="mx-auto mt-20 max-w-7xl scroll-mt-8 lg:mt-32 px-4 sm:px-6">
         <div className="grid gap-4 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-5 md:pt-10">
-            <Etikett>Salongen</Etikett>
-            <h2 id="salong-tittel" className="mt-4 text-[clamp(2.25rem,4.25vw,3.5rem)]">
-              Svart, rødt og <span className="neonord">litt for mye</span> neon
+            <h2 id="salong-tittel" className="text-[clamp(2.25rem,4.25vw,3.5rem)]">
+              Svart, rødt og litt for mye neon
             </h2>
             <p className="mt-6 max-w-prose text-[1.1875rem] text-gra">
               Seks stoler, to vasker og en sofa du ikke vil reise deg fra. Kaffen er god, musikken er høy nok, og ingen spør om du
@@ -198,21 +191,20 @@ export default function Forside() {
           <div className="kutt-venstre md:col-span-7">
             <Foto bilde={bilder.stasjoner} className="aspect-[16/10] w-full object-cover" sizes="(min-width: 768px) 58vw, 100vw" />
           </div>
-          <div className="glid md:col-span-4 md:col-start-2 md:mt-8">
+          <div className="md:col-span-4 md:col-start-2 md:mt-8">
             <Foto bilde={bilder.neon} className="aspect-square w-full object-cover" />
           </div>
-          <div className="glid md:col-span-3 md:mt-16">
+          <div className="md:col-span-3 md:mt-16">
             <Foto bilde={bilder.produkter} className="aspect-[3/4] w-full object-cover" />
           </div>
-          <div className="glid kutt-hoyre md:col-span-4 md:-mt-6">
+          <div className="kutt-hoyre md:col-span-4 md:-mt-6">
             <Foto bilde={bilder.ventesone} className="aspect-[4/5] w-full object-cover" />
           </div>
         </div>
       </section>
 
       {/* ---------- Bestill ---------- */}
-      <section aria-labelledby="cta-tittel" className="relative mt-36">
-        <div aria-hidden="true" className="tegn neonglod mx-auto mb-10 h-[3px] w-[80%] -rotate-3 bg-neon" />
+      <section aria-labelledby="cta-tittel" className="relative mt-24 lg:mt-36">
         <div className="kutt-begge relative isolate overflow-hidden bg-rod py-[calc(3.5vw+5rem)]">
           <Foto
             bilde={bilder.sakser}
@@ -241,8 +233,7 @@ export default function Forside() {
       {/* ---------- Finn oss ---------- */}
       <section id="finn-oss" aria-labelledby="finn-tittel" className="mx-auto mt-20 grid max-w-7xl scroll-mt-8 lg:mt-32 gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr_1.2fr]">
         <div>
-          <Etikett>Finn oss</Etikett>
-          <h2 id="finn-tittel" className="mt-4 text-[clamp(2.25rem,3.75vw,2.75rem)]">
+          <h2 id="finn-tittel" className="text-[clamp(2.25rem,3.75vw,2.75rem)]">
             {salong.gate}
           </h2>
           <p className="mt-4 text-[1.1875rem]">

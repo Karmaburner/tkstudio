@@ -2,7 +2,6 @@
 
 import { useState, useSyncExternalStore } from "react";
 import { alleBehandlinger, apningstider, kategorier, minutter, team, tillegg } from "@/lib/salong";
-import { RullTekst } from "@/components/Felles";
 
 const kroner = (pris: string) => parseInt(pris.replace(/\D/g, ""));
 const trengerToning = ["Striper", "Balayage", "Bleking"];
@@ -464,13 +463,13 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
             type="submit"
             className="knapp knapp-hvit mt-6 w-full"
           >
-            <RullTekst>{!valgte.length
+            {!valgte.length
                 ? "Velg behandling"
                 : tid
                   ? "Bekreft bestilling"
                   : dag?.tider.length === 0
                     ? "Velg en annen dag"
-                    : "Velg tidspunkt"}</RullTekst>
+                    : "Velg tidspunkt"}
           </button>
           <p className="mt-4 text-[0.9375rem] text-gra">Demo. Ingenting blir sendt.</p>
         </div>

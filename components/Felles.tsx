@@ -1,34 +1,8 @@
 import Link from "next/link";
 import type { Bilde } from "@/lib/salong";
 
-// Teksten i en knapp, som ruller opp ved hover mens pila flyr ut og tilbake.
-// Kopien er skjult for skjermlesere, så de hører teksten én gang.
-export function RullTekst({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <span className="rull-tekst">
-        <span>{children}</span>
-        <span aria-hidden="true">{children}</span>
-      </span>
-      <span aria-hidden="true" className="rull-pil">
-        <Pil />
-        <Pil />
-      </span>
-    </>
-  );
-}
-
-// Pila er tegnet, ikke et tegn i skriften. Et tegn avrundes til hele piksler for seg selv,
-// og kunne havne 1 px lavere i noen knapper enn andre.
-function Pil() {
-  return (
-    <svg viewBox="0 0 20 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" className="h-[0.6em] w-[1em]">
-      <path d="M1 6h16M12 1.5 16.5 6 12 10.5" />
-    </svg>
-  );
-}
-
 // Hovedknappen er hvit, den andre har hvit kant. Begge har rette hjørner.
+// Ingen pil bak teksten: knappeteksten sier selv hva som skjer.
 export function Knapp({
   href,
   children,
@@ -44,12 +18,13 @@ export function Knapp({
   const stil = { hvit: "knapp-hvit", omriss: "knapp-omriss" }[variant];
   return (
     <Link href={href} className={`knapp ${stil} ${className}`}>
-      <RullTekst>{children}</RullTekst>
+      {children}
     </Link>
   );
 }
 
 // Liten etikett over titler: bred skrift med luft, som STUDIO i logoen.
+// Brukes bare i toppen på forsiden. Over hver seksjon blir den mal-pynt.
 export function Etikett({ children, farge = "text-lavendel" }: { children: React.ReactNode; farge?: string }) {
   return (
     <p className={`bred flex items-center gap-3 text-[0.875rem] ${farge}`}>
@@ -88,20 +63,17 @@ export function Foto({
   );
 }
 
-// Toppen på undersidene: enorm smal tittel, skrå neonlinje og ingress.
+// Toppen på undersidene: enorm tittel, skrå neonlinje og ingress.
 export function SideTopp({
-  etikett,
   tittel,
   children,
 }: {
-  etikett: string;
   tittel: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
     <div className="relative mx-auto max-w-7xl px-4 pb-14 pt-14 sm:px-6 sm:pt-20">
-      <Etikett>{etikett}</Etikett>
-      <h1 className="mt-8 text-[clamp(2.25rem,8vw,6.25rem)]">{tittel}</h1>
+      <h1 className="text-[clamp(2.25rem,8vw,6.25rem)]">{tittel}</h1>
       <div aria-hidden="true" className="hero-strek neonglod mt-6 h-[4px] w-[min(40rem,80%)] -skew-x-[40deg] bg-neon" />
       {children && <div className="mt-8 max-w-prose space-y-4 text-[1.1875rem] text-gra">{children}</div>}
     </div>

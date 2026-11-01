@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { alleBehandlinger, behandlingFor, filtre, frisyreSlug, frisyrer, type FrisyreType } from "@/lib/salong";
-import { Foto, RullTekst } from "./Felles";
+import { Foto } from "./Felles";
 
 // Hele galleriet med filter. Annenhver kolonne er skjøvet ned, så rutenettet blir skjevt.
 // Et klikk på et bilde åpner det stort i en <dialog>, som gir fokusfelle og Esc uten ekstra kode.
@@ -153,7 +153,7 @@ export function Galleri({ start }: { start?: string }) {
                     href={`/bestill-time?behandling=${encodeURIComponent(behandling.navn)}`}
                     className="knapp knapp-hvit"
                   >
-                    <RullTekst>Bestill noe lignende</RullTekst>
+                    Bestill noe lignende
                   </Link>
                 )}
                 <div className="grid grid-cols-2 gap-3">

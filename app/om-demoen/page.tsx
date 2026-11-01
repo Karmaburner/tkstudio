@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Etikett, Knapp, SideTopp } from "@/components/Felles";
+import { Knapp, SideTopp } from "@/components/Felles";
 
 export const metadata: Metadata = {
   title: "Om demoen",
@@ -44,7 +44,7 @@ const punkter = [
 export default function OmDemoen() {
   return (
     <>
-      <SideTopp etikett="Om demoen" tittel={<>En salong som <span className="neonord">ikke finnes</span></>}>
+      <SideTopp tittel="En salong som ikke finnes">
         <p>
           TK Studio er laget av Lilit Labs for å vise hva en frisørsalong kan få: en side med like mye personlighet som salongen selv.
         </p>
@@ -56,29 +56,24 @@ export default function OmDemoen() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <section aria-labelledby="viser-tittel">
-          <Etikett>Seks grep</Etikett>
-          <h2 id="viser-tittel" className="mt-4 text-[clamp(2.25rem,4.25vw,3rem)]">
+          <h2 id="viser-tittel" className="text-[clamp(2.25rem,4.25vw,3rem)]">
             Dette viser siden
           </h2>
-          <ol className="mt-12 grid gap-x-12 gap-y-14 md:grid-cols-2">
-            {punkter.map((p, i) => (
-              <li key={p.tittel} className="glid flex flex-col border-t-2 border-hvit pt-5">
-                <span aria-hidden="true" className="tall text-[1.25rem] text-lavendel">
-                  0{i + 1}
-                </span>
-                <h3 className="mt-2 text-[2.5rem]">{p.tittel}</h3>
+          <ul className="mt-12 grid gap-x-12 gap-y-14 md:grid-cols-2">
+            {punkter.map((p) => (
+              <li key={p.tittel} className="flex flex-col border-t-2 border-hvit pt-5">
+                <h3 className="text-[2.5rem]">{p.tittel}</h3>
                 <p className="mt-3 flex-1 text-gra">{p.tekst}</p>
                 <Link href={p.href} className="lenke mt-4 self-start py-1">
                   Se det på siden
                 </Link>
               </li>
             ))}
-          </ol>
+          </ul>
         </section>
 
         <section aria-labelledby="lilit-tittel" className="kutt-hjorne mt-28 bg-fuksia px-6 py-14 sm:px-12">
-          <Etikett farge="text-hvit">Lilit Labs</Etikett>
-          <h2 id="lilit-tittel" className="mt-4 max-w-3xl text-[clamp(2.25rem,3.75vw,2.75rem)]">
+          <h2 id="lilit-tittel" className="max-w-3xl text-[clamp(2.25rem,3.75vw,2.75rem)]">
             Vil du ha noe lignende for din salong?
           </h2>
           <p className="mt-5 max-w-prose text-[1.1875rem]">
