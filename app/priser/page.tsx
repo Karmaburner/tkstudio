@@ -4,7 +4,7 @@ import { kategorier, tillegg } from "@/lib/salong";
 
 export const metadata: Metadata = {
   title: "Priser",
-  description: "Alle priser hos TK Studio: klipp, herre, farge og styling. Du får vite hva det koster før vi begynner.",
+  description: "Alle priser hos TK Studio: klipp, skjegg, farge og styling. Du får vite hva det koster før vi begynner.",
 };
 
 // Prislisten som plakat: store tall, tykke streker, ingen tabellkant.

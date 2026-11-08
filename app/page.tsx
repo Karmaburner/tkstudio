@@ -67,7 +67,7 @@ export default function Forside() {
             </h2>
           </div>
           <p className="max-w-prose text-[1.1875rem] text-gra lg:pb-3">
-            Klipp, herre, farge og styling. Vi kan håndverket og sier hva det koster før vi begynner.
+            Klipp, skjegg, farge og styling. Vi kan håndverket og sier hva det koster før vi begynner.
           </p>
         </div>
 
