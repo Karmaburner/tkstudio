@@ -48,6 +48,10 @@ type Feil = Partial<Record<"behandling" | "tid" | "navn" | "telefon", string>>;
 const kort =
   "flex min-h-14 cursor-pointer items-center justify-between gap-4 border-2 border-gra px-4 py-3 transition-colors hover:border-neon has-[:checked]:border-hvit has-[:checked]:bg-hvit has-[:checked]:text-kull has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-lavendel";
 
+// Et valg som allerede inngår i en annen behandling: synlig, men ikke klikkbart.
+const laast =
+  "flex min-h-14 cursor-not-allowed items-center justify-between gap-4 border-2 border-linje px-4 py-3 text-gra";
+
 function Steg({ nr, tittel, children }: { nr: string; tittel: string; children: React.ReactNode }) {
   return (
     <fieldset className="border-t-2 border-hvit pt-6">
@@ -92,6 +96,9 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
   const valgtBehandling = valgte[0];
   const behandling = valgte.map((b) => b.navn).join(" og ");
   const betalt = valgte.some((b) => b.pris !== "0");
+  // Behandlinger som allerede inngår i en valgt kombinasjon, for eksempel Skjegg i Klipp og skjegg.
+  // De kan ikke velges i tillegg, så ingen betaler for det samme to ganger.
+  const inkludert = new Map(valgte.flatMap((v) => (v.inkluderer ?? []).map((navn) => [navn, v.navn] as const)));
   // Tillegg vises ikke ved gratis konsultasjon, og teller da heller ikke med.
   const valgteTillegg = betalt ? tillegg.filter((t) => ekstra.includes(t.navn)) : [];
   const varighet =
@@ -188,33 +195,43 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
             {kategorier
               .find((k) => k.slug === fane)!
               .behandlinger.map((b) => (
-                <label key={b.navn} className={kort}>
+                <label key={b.navn} className={inkludert.has(b.navn) ? laast : kort}>
                   <span className="flex items-center gap-3">
                     {/* Avkrysning, så valget kan tas bort igjen. Et nytt valg i samme fane bytter ut det gamle. */}
                     <input
                       type="checkbox"
                       name="behandling"
                       value={b.navn}
+                      disabled={inkludert.has(b.navn)}
                       checked={valg[fane] === b.navn}
                       onChange={(e) =>
                         setValg((v) => {
                           const ny = { ...v };
-                          if (e.target.checked) ny[fane] = b.navn;
-                          else delete ny[fane];
+                          if (e.target.checked) {
+                            ny[fane] = b.navn;
+                            // Velger du Klipp og skjegg, ryker et Skjegg du alt hadde valgt.
+                            for (const [slug, navn] of Object.entries(ny)) {
+                              if (slug !== fane && (b.inkluderer ?? []).includes(navn)) delete ny[slug];
+                            }
+                          } else delete ny[fane];
                           return ny;
                         })
                       }
                       className="sr-only"
                     />
                     <span aria-hidden="true" className="tall w-4 text-center">
-                      {valg[fane] === b.navn ? "✓" : "+"}
+                      {inkludert.has(b.navn) ? "✓" : valg[fane] === b.navn ? "✓" : "+"}
                     </span>
                     <span>
                       <span className="block font-bold">{b.navn}</span>
-                      <span className="tall block text-[0.9375rem]">{b.tid}</span>
+                      <span className="tall block text-[0.9375rem]">
+                        {inkludert.has(b.navn) ? `Inngår i ${inkludert.get(b.navn)}` : b.tid}
+                      </span>
                     </span>
                   </span>
-                  <span className="tall whitespace-nowrap">{b.pris === "0" ? "Gratis" : `${b.pris} kr`}</span>
+                  <span className="tall whitespace-nowrap">
+                    {inkludert.has(b.navn) ? "Inkludert" : b.pris === "0" ? "Gratis" : `${b.pris} kr`}
+                  </span>
                 </label>
               ))}
           </div>

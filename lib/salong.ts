@@ -90,7 +90,8 @@ export const team: Frisor[] = [
   },
 ];
 
-export type Behandling = { navn: string; pris: string; tid: string; merknad?: string };
+// inkluderer: andre behandlinger som allerede ligger i denne, så de ikke kan kjøpes i tillegg.
+export type Behandling = { navn: string; pris: string; tid: string; merknad?: string; inkluderer?: string[] };
 // frisor: den som anbefales i bestillingen når noen velger en behandling herfra.
 export type Kategori = { slug: string; tittel: string; ingress: string; frisor: string; bilde: Bilde; behandlinger: Behandling[] };
 
@@ -108,7 +109,7 @@ export const kategorier: Kategori[] = [
       { navn: "Klipp og føn", pris: "1 090", tid: "75 min", merknad: "Klipp med vask, føn og styling etterpå." },
       { navn: "Fade", pris: "720", tid: "45 min" },
       { navn: "Maskinklipp", pris: "420", tid: "20 min" },
-      { navn: "Klipp og skjegg", pris: "890", tid: "60 min", merknad: "Herreklipp og skjegg i samme time, rimeligere enn hver for seg." },
+      { navn: "Klipp og skjegg", pris: "890", tid: "60 min", merknad: "Herreklipp og skjegg i samme time, rimeligere enn hver for seg.", inkluderer: ["Skjegg"] },
       { navn: "Lugg", pris: "290", tid: "15 min" },
     ],
   },
