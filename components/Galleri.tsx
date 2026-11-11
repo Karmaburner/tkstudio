@@ -109,7 +109,8 @@ export function Galleri({ start }: { start?: string }) {
                 alt={vist.bilde.alt}
                 width={vist.bilde.w}
                 height={vist.bilde.h}
-                className="lysboks-bilde mx-auto max-h-[58svh] w-auto object-contain lg:max-h-[86svh]"
+                // Lavt nok på mobil til at «Forrige» og «Neste» får plass uten rulling.
+                className="lysboks-bilde mx-auto max-h-[44svh] w-auto object-contain lg:max-h-[86svh]"
               />
             </div>
 

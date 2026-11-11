@@ -31,7 +31,7 @@ const punkter = [
   },
   {
     tittel: "Frekk, men lesbar",
-    tekst: "Sterke farger og store ord, men all tekst har god kontrast, og alt kan brukes med tastatur og stor zoom. Bevegelse stopper for dem som har slått det av.",
+    tekst: "Sterke farger og store ord, men all tekst har god kontrast. Alt kan brukes med tastatur og stor zoom. Bevegelse stopper for dem som har slått det av.",
     href: "/",
   },
   {
@@ -49,7 +49,7 @@ export default function OmDemoen() {
           TK Studio er laget av Lilit Labs for å vise hva en frisørsalong kan få: en side med like mye personlighet som salongen selv.
         </p>
         <p>
-          Salongen, personene, prisene og adressen er oppdiktet, og bildene er laget med KI. På en ekte side kommer all tekst, alle
+          Salongen, personene, prisene og adressen er oppdiktet. Bildene er laget med KI. På en ekte side kommer all tekst, alle
           priser og bilder fra salongen.
         </p>
       </SideTopp>

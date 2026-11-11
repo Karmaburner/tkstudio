@@ -100,7 +100,9 @@ export function Kart() {
           <g className="hidden lg:inline" fill="none" stroke="var(--color-hvit)" strokeWidth="1">
             {ledere.map((l) => (
               <g key={l.tekst}>
-                <text x="20" y={l.y + 5} className="bred" fill="var(--color-hvit)" stroke="none" fontSize="14">
+                {/* 19 enheter i kartet blir minst 15 px på skjermen, også på 1024 px bredde. Vanlig skrift
+                    uten sperring, ellers får ikke teksten plass foran ledelinjen. */}
+                <text x="20" y={l.y + 6} fill="var(--color-hvit)" stroke="none" fontSize="19" fontWeight="700">
                   {l.tekst}
                 </text>
                 <path className="kart-strek kart-sist" pathLength={1} d={`M420 ${l.y} ${l.til}`} />

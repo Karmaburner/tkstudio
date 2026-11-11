@@ -28,8 +28,9 @@ export function Knapp({
 // Brukes bare i toppen på forsiden. Over hver seksjon blir den mal-pynt.
 export function Etikett({ children, farge = "text-lavendel" }: { children: React.ReactNode; farge?: string }) {
   return (
-    <p className={`bred flex items-center gap-3 text-[0.875rem] ${farge}`}>
-      <span aria-hidden="true" className="h-[3px] w-8 -skew-x-[30deg] bg-neon" />
+    // Litt tettere på mobil, så etiketten holder seg på én linje i 15 px.
+    <p className={`bred flex items-center gap-2 whitespace-nowrap text-[0.9375rem] max-sm:!tracking-[0.2em] sm:gap-3 ${farge}`}>
+      <span aria-hidden="true" className="h-[3px] w-5 shrink-0 -skew-x-[30deg] bg-neon sm:w-8" />
       {children}
     </p>
   );

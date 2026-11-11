@@ -36,10 +36,10 @@ export function Footer() {
         </div>
         <div>
           <h2 className="text-[2rem]">Sider</h2>
-          <ul className="mt-4 space-y-1">
+          <ul className="mt-2">
             {[...meny, { href: "/bestill-time", tekst: "Bestill time" }, { href: "/om-demoen", tekst: "Om demoen" }].map((m) => (
               <li key={m.href}>
-                <Link href={m.href} className="inline-block py-1 underline decoration-linje underline-offset-4 hover:decoration-neon">
+                <Link href={m.href} className="inline-block py-2.5 underline decoration-linje underline-offset-4 hover:decoration-neon">
                   {m.tekst}
                 </Link>
               </li>
@@ -49,12 +49,12 @@ export function Footer() {
       </div>
       <div className="border-t border-linje">
         <p className="mx-auto max-w-7xl px-4 py-7 text-base text-gra sm:px-6">
-          Demo. Salongen, personene, prisene og adressen er oppdiktet, og bildene er laget med KI.{" "}
-          <Link href="/om-demoen" className="font-bold text-hvit underline underline-offset-4">
+          Demo. Salongen, personene, prisene og adressen er oppdiktet. Bildene er laget med KI.{" "}
+          <Link href="/om-demoen" className="inline-block py-2.5 font-bold text-hvit underline underline-offset-4">
             Om demoen
           </Link>
           {" · "}Nettside av:{" "}
-          <a href="https://lilitlabs.com" className="font-bold text-hvit underline underline-offset-4">
+          <a href="https://lilitlabs.com" className="inline-block py-2.5 font-bold text-hvit underline underline-offset-4">
             Lilit Labs
           </a>
         </p>

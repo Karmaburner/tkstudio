@@ -15,6 +15,8 @@ export const salong = {
   telefonLenke: "+4712345678",
   epost: "hei@tkstudio.example",
   instagram: "@tkstudio",
+  // Adressen er oppdiktet, så «Vis vei» åpner Hønefoss sentrum. På en ekte side: salongens adresse.
+  kartLenke: "https://www.google.com/maps/search/?api=1&query=H%C3%B8nefoss+sentrum",
   url: "https://karmaburner.github.io/tkstudio",
   adkomst: "Inngang fra gata, ingen trapper. Gratis parkering i en time på torget rett over.",
 };
@@ -38,7 +40,7 @@ export const bilder = {
   resepsjon: { src: b("salong-resepsjon.webp"), alt: "Resepsjonen med logoen på en svart vegg og stylingplassene langs speilene.", w: 1000, h: 481 },
   inngang: { src: b("salong-inngang.webp"), alt: "Salongen sett fra inngangen, med skranken i svart marmor og en rød diagonal gjennom den.", w: 1000, h: 684 },
   stasjoner: { src: b("salong-stasjoner.webp"), alt: "En lang rekke stylingstasjoner med speil innrammet av rødt lys.", w: 1000, h: 564 },
-  skranke: { src: b("salong-skranke.webp"), alt: "Skranken med røde blomster, og salongen bak med buede speil.", w: 1000, h: 583 },
+  skranke: { src: b("salong-skranke.webp"), alt: "Skranken med røde blomster foran salongen med buede speil.", w: 1000, h: 583 },
   interior: { src: b("salong-interior.webp"), alt: "Stoler i svart skinn foran speil med røde og lilla vinkler på veggene.", w: 1030, h: 545 },
   logovegg: { src: b("salong-logo.webp"), alt: "TK Studio-logoen lyser på veggen over skranken.", w: 1018, h: 562 },
   perspektiv: { src: b("salong-perspektiv.webp"), alt: "Salongen fra siden, med varme lamper over skranken og en lilla vegg bak.", w: 1035, h: 538 },
@@ -75,7 +77,7 @@ export const team: Frisor[] = [
   {
     slug: "kasper",
     navn: "Kasper",
-    rolle: "Klipp og herre, medeier",
+    rolle: "Klipp og skjegg, medeier",
     tekst: "K-en i TK. Gikk fra barbersalong til dameklipp og tok med seg presisjonen. Har en fade han kaller «linjal» og blir aldri ferdig før det er symmetrisk.",
     liker: ["Fade og herreklipp", "Krøller", "Presise bobber"],
     bilde: { src: b("team-kasper.webp"), alt: "Kasper med krøllete hår og skjegg føner en kunde i TK Studio-forkle.", w: 700, h: 1101 },
@@ -91,7 +93,8 @@ export const team: Frisor[] = [
 ];
 
 // inkluderer: andre behandlinger som allerede ligger i denne, så de ikke kan kjøpes i tillegg.
-export type Behandling = { navn: string; pris: string; tid: string; merknad?: string; inkluderer?: string[] };
+// smatt: en liten ting som ikke skal gi «fra»-prisen på forsiden. «Klipp fra kr 290» er prisen på lugg, ikke på en klipp.
+export type Behandling = { navn: string; pris: string; tid: string; merknad?: string; inkluderer?: string[]; smatt?: boolean };
 // frisor: den som anbefales i bestillingen når noen velger en behandling herfra.
 export type Kategori = { slug: string; tittel: string; ingress: string; frisor: string; bilde: Bilde; behandlinger: Behandling[] };
 
@@ -100,7 +103,7 @@ export const kategorier: Kategori[] = [
     slug: "klipp",
     frisor: "kasper",
     tittel: "Klipp",
-    ingress: "Dame, herre og barn i samme liste. Fra en enkel stuss til en helt ny form, og alltid fem minutter prat først.",
+    ingress: "Dame, herre og barn i samme liste. Fra en enkel stuss til en helt ny form. Alltid fem minutter prat først.",
     bilde: bilder.arbeidKlipp,
     behandlinger: [
       { navn: "Dameklipp", pris: "850", tid: "60 min" },
@@ -110,7 +113,7 @@ export const kategorier: Kategori[] = [
       { navn: "Fade", pris: "720", tid: "45 min" },
       { navn: "Maskinklipp", pris: "420", tid: "20 min" },
       { navn: "Klipp og skjegg", pris: "890", tid: "60 min", merknad: "Herreklipp og skjegg i samme time, rimeligere enn hver for seg.", inkluderer: ["Skjegg"] },
-      { navn: "Lugg", pris: "290", tid: "15 min" },
+      { navn: "Lugg", pris: "290", tid: "15 min", smatt: true },
     ],
   },
   {

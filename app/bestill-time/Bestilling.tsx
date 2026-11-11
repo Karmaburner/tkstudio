@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { alleBehandlinger, apningstider, kategorier, minutter, team, tillegg } from "@/lib/salong";
 
 const kroner = (pris: string) => parseInt(pris.replace(/\D/g, ""));
@@ -83,6 +83,14 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
   const [ekstra, setEkstra] = useState<string[]>([]);
   const [feil, setFeil] = useState<Feil>({});
   const [sendt, setSendt] = useState(false);
+  // Skjemaet er langt og kvitteringen kort. Uten dette står kunden igjen nederst på en
+  // side som har krympet, og ser ikke at bestillingen gikk.
+  const kvittering = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!sendt) return;
+    kvittering.current?.focus({ preventScroll: true });
+    kvittering.current?.scrollIntoView({ block: "start" });
+  }, [sendt]);
 
   // Datoene lages i nettleseren, så den statiske siden ikke viser gamle datoer.
   // Falsk under bygging, sann i nettleseren.
@@ -139,14 +147,14 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
 
   if (sendt) {
     return (
-      <div role="status" className="kutt-hjorne bg-fuksia p-8 sm:p-12">
+      <div ref={kvittering} tabIndex={-1} role="status" className="kutt-hjorne scroll-mt-6 bg-fuksia p-8 outline-none sm:p-12">
         <p className="smal text-[clamp(3rem,8vw,5.5rem)] leading-none">Sees!</p>
         <p className="mt-5 max-w-prose text-[1.1875rem]">
           {behandlingTekst} med {frisorNavn?.toLowerCase() === "første ledige" ? "første ledige frisør" : frisorNavn}, {dag?.navn.toLowerCase()}{" "}
-          {dag?.dato} klokka <span className="tall">{tid}</span>.
+          {dag?.dato} kl. <span className="tall">{tid}</span>.
         </p>
         <p className="mt-4 max-w-prose">
-          På en ekte side ville salongen fått bestillingen nå, og du ville fått en SMS. Dette er en demo, så ingenting ble sendt.
+          På en ekte side ville salongen fått bestillingen nå og du ville fått en SMS. Dette er en demo, så ingenting ble sendt.
         </p>
       </div>
     );
@@ -238,7 +246,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
 
           {betalt && (
           <div className="mt-10">
-            <p className="bred text-[0.875rem] text-lavendel">Legg til</p>
+            <p className="bred text-[0.9375rem] text-lavendel">Legg til</p>
             <p className="mt-2 text-gra">Valgfritt. Legges til {behandling.toLowerCase()}.</p>
             <div className="mt-3 grid gap-2 md:grid-cols-2">
               {tillegg.map((t) => (
@@ -261,7 +269,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                       <span className="block font-bold">
                         {t.navn}
                         {t.navn === "Toning" && valgte.some((b) => trengerToning.includes(b.navn)) && (
-                          <span className="kutt-hjorne ml-2 bg-lavendel px-2 py-0.5 text-[0.875rem] text-kull">Anbefalt</span>
+                          <span className="kutt-hjorne ml-2 bg-lavendel px-2 py-0.5 text-[0.9375rem] text-kull">Anbefalt</span>
                         )}
                       </span>
                       <span className="tall block text-[0.9375rem]">{t.tid}</span>
@@ -295,7 +303,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
                   <span className="mt-1 block text-[0.9375rem]">{p.rolle}</span>
                 </span>
                 {anbefalt === p.slug && (
-                  <span className="kutt-hjorne shrink-0 bg-lavendel px-2 py-1 text-[0.875rem] font-bold text-kull">
+                  <span className="kutt-hjorne shrink-0 bg-lavendel px-2 py-1 text-[0.9375rem] font-bold text-kull">
                     Anbefalt for {viktigst?.navn.toLowerCase()}
                   </span>
                 )}
@@ -414,7 +422,7 @@ export function Bestilling({ start = {} }: { start?: { behandling?: string; fris
       {/* Oppsummeringen følger med når man ruller på stor skjerm. */}
       <aside aria-label="Din bestilling" className="lg:sticky lg:top-6 lg:self-start">
         <div className="kutt-hjorne bg-flate p-6">
-          <p className="bred text-[0.875rem] text-lavendel">Din time</p>
+          <p className="bred text-[0.9375rem] text-lavendel">Din time</p>
           <dl className="mt-4 space-y-3">
             <div>
               <dt className="text-gra">Behandling</dt>

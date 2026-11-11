@@ -5,9 +5,14 @@ import { Stripe } from "@/components/Stripe";
 import { EpostIkon, Etikett, Foto, Knapp, TelefonIkon } from "@/components/Felles";
 import { bilder, frisyreSlug, frisyrer, kategorier, salong, team } from "@/lib/salong";
 
-// Den billigste behandlingen i kategorien, så «fra» stemmer med prislisten. Gratis konsultasjon teller ikke.
+// Den billigste behandlingen i kategorien, så «fra» stemmer med prislisten. Gratis konsultasjon og småting som lugg teller ikke.
 const laveste = (k: (typeof kategorier)[number]) =>
-  Math.min(...k.behandlinger.map((b) => parseInt(b.pris.replace(/\D/g, ""))).filter((p) => p > 0)).toLocaleString("nb-NO");
+  Math.min(
+    ...k.behandlinger
+      .filter((b) => !b.smatt)
+      .map((b) => parseInt(b.pris.replace(/\D/g, "")))
+      .filter((p) => p > 0),
+  ).toLocaleString("nb-NO");
 
 // Et utvalg til stripa på forsiden. Hele galleriet ligger på /frisyrer.
 const utvalg = ["Burgunderbølger", "Rød balayage", "Teksturert fade", "Fuksia bob", "Festfrisyre", "Platina pixie", "Rosa og lilla ombré", "Burgunder bob", "Kobberkrøller"]
@@ -27,10 +32,11 @@ export default function Forside() {
           <div aria-hidden="true" className="hero-blad pointer-events-none absolute inset-y-0 left-0 w-1/4 -skew-x-[24deg] bg-gradient-to-r from-transparent via-neon/45 to-transparent opacity-0" />
         </div>
 
-        {/* Kjempestor TK i omriss bak teksten. Bare pynt. */}
+        {/* Kjempestor TK i omriss bak teksten. Bare pynt, og bare på stor skjerm:
+            på mobil stakk den fram som løse streker under bildet. */}
         <p
           aria-hidden="true"
-          className="smal omriss pointer-events-none absolute -left-6 top-[22svh] -z-10 select-none text-[48vw] leading-[0.8] opacity-40 lg:top-auto lg:bottom-[-6vw] lg:text-[34vw]"
+          className="smal omriss pointer-events-none absolute -left-6 bottom-[-6vw] -z-10 hidden select-none text-[34vw] leading-[0.8] opacity-40 lg:block"
         >
           TK
         </p>
@@ -102,7 +108,7 @@ export default function Forside() {
           ))}
         </ol>
         <p className="mt-8">
-          <Link href="/priser" className="lenke">
+          <Link href="/priser" className="lenke inline-block py-2">
             Se hele prislisten
           </Link>
         </p>
@@ -146,7 +152,7 @@ export default function Forside() {
             T for Tiril. K for Kasper. Ronja for resten.
           </h2>
           <p className="mt-6 max-w-prose text-[1.1875rem]">
-            TK Studio er to frisører som ville ha sin egen salong, og en tredje som de ikke klarte seg uten. Du velger selv hvem du
+            TK Studio er to frisører som ville ha sin egen salong og en tredje som de ikke klarte seg uten. Du velger selv hvem du
             vil ha når du bestiller.
           </p>
 
@@ -158,7 +164,7 @@ export default function Forside() {
                   <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-kull/90 to-transparent" />
                   <h3 className="absolute bottom-4 left-4 text-[4.5rem] leading-none">{p.navn}</h3>
                 </div>
-                <p className="bred mt-5 text-[0.875rem] text-hvit">{p.rolle}</p>
+                <p className="bred mt-5 text-[0.9375rem] text-hvit">{p.rolle}</p>
                 <p className="mt-3">{p.tekst}</p>
                 <ul className="mt-4 flex flex-wrap gap-2" aria-label={`${p.navn} liker`}>
                   {p.liker.map((l) => (
@@ -184,7 +190,7 @@ export default function Forside() {
               Svart, rødt og litt for mye neon
             </h2>
             <p className="mt-6 max-w-prose text-[1.1875rem] text-gra">
-              Seks stoler, to vasker og en sofa du ikke vil reise deg fra. Kaffen er god, musikken er høy nok, og ingen spør om du
+              Seks stoler, to vasker og en sofa du ikke vil reise deg fra. Kaffen er god og musikken er høy nok. Ingen spør om du
               skal noe spesielt i helgen.
             </p>
           </div>
@@ -241,6 +247,11 @@ export default function Forside() {
             <span className="tall">{salong.postnr}</span> {salong.sted}
           </p>
           <p className="mt-4 max-w-sm text-gra">{salong.adkomst}</p>
+          <p className="mt-2">
+            <a href={salong.kartLenke} className="lenke inline-block py-2">
+              Vis vei i Google Maps
+            </a>
+          </p>
           <p className="mt-6 space-y-1">
             <a href={`tel:${salong.telefonLenke}`} className="lenke tall flex w-fit items-center gap-3 py-1 text-[1.5rem]">
               <TelefonIkon className="text-lavendel" />
